@@ -1,5 +1,5 @@
 package classes;
 
-public class Hiker {
+public class Hiker extends Searcher{
 
 }

@@ -1,5 +1,5 @@
 package classes;
 
-public class Helicopter {
+public class Helicopter extends Searcher{
 
 }

@@ -1,5 +1,5 @@
 package classes;
 
-public class DogTeam {
+public class DogTeam extends Searcher{
 
 }
