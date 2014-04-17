@@ -25,7 +25,6 @@ public class part1tests {
 		rescue = new AlpineRescue("AlpineRescuemap.jpg");
 	}
 	
-	
 	@Test
 	public void testLoad() {
 

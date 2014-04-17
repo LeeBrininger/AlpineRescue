@@ -1,5 +1,5 @@
-package classes
+package classes;
 
-public void ControlPanel(){
+public class ControlPanel {
 	
 }
