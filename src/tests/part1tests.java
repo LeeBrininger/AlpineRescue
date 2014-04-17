@@ -28,9 +28,35 @@ public class part1tests {
 	
 	@Test
 	public void testLoad() {
-		assertTrue(rescue.loadgrid() != null);
+
 		
 		
+	}
+	@Test
+	public void testSearch() {
+
+		
+		
+	}
+	@Test
+	public void testGrid() {
+
+		
+		
+	}
+	@Test
+	public void testImage() {
+
+		
+		
+	}
+	@Test
+	public void testMovement() {
+
+	}
+	@Test
+	public void testPathSave() {
+
 	}
 	
 }

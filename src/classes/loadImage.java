@@ -13,11 +13,17 @@ import javax.swing.JFrame;
 
 public class loadImage extends Component{
 	BufferedImage img;
-	
+	private static String file;
 	public loadImage(){
-		
+		try{
+			img = ImageIO.read(new File(file));
+		}catch (IOException e){
+			
+		}
 	}
-	
+	public void setFile(String filer){
+		file = filer;
+	}
 	public void paint(Graphics g){
 
 		g.drawImage(img, 100, 100, 500, 500, null);
@@ -30,11 +36,8 @@ public class loadImage extends Component{
 			
 		}
 	}
-	
-	
-	public static void main(String[] args){
+	public void printImage(){
 		JFrame f = new JFrame("Load Image Sample");
-		
 		f.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				System.exit(0);
