@@ -7,14 +7,16 @@ public class Searcher {
 	private String direction;
 	private int xpos;
 	private int ypos;
-	private Position pos;
+	private Position pos = new Position(0,0);
 	private ArrayList<Position> visited = new ArrayList<Position>();
 	
 	public Searcher(){}
 	
-	public Searcher(String type, String direction, int speed, int xpos, int ypos){
-		pos = new Position(xpos, ypos);
-		System.out.println(pos.getY());
+	public Searcher(String directions, int speeds, int xpos, int ypos){
+		pos.changeX(xpos);
+		pos.changeY(ypos);
+		speed = speed;
+		direction = directions;
 	}
 	
 	public void updatePosition(){

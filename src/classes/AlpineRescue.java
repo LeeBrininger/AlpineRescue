@@ -14,19 +14,20 @@ import javax.swing.JMenuItem;
 public class AlpineRescue {
 	private int time;
 	private String file = "AlpineRescuemap.jpg";
-	static loadImage image;
+	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers = new HashMap<String, Searcher>();
+	private static AlpineRescue rescue = new AlpineRescue();
 	
-	public AlpineRescue(){}
+	public AlpineRescue(){
+	}
 	
 	public AlpineRescue(String mapfile){
 		file = mapfile;
 	}
 	
 	public void loadGrid(){
-		loadImage image = new loadImage(file);
-		image.setFile(file);
+		grid = new Grid(file);
 	}
 	public void addSearcher(String name, String type, String direction, int speed, int xpos, int ypos) {
 		if(type == "dogteam"){
@@ -44,8 +45,13 @@ public class AlpineRescue {
 	public Searcher getSearcher(String name){
 		return searchers.get(name);
 	}
+	
+	public void printGrid(){
+		grid.printImage();
+	}
 	public static void main(String Args[]){
-		
+		rescue.loadGrid();
+		rescue.printGrid();
 	}
 
 

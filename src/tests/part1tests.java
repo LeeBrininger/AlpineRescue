@@ -26,7 +26,7 @@ public class part1tests {
 		rescue = new AlpineRescue();
 	}
 	
-	@Test
+	@Test //Not really sure how to test this
 	public void testLoad() {
 		rescue = new AlpineRescue("AlpineRescuemap.jpg");
 		
@@ -40,17 +40,16 @@ public class part1tests {
 		equals(rescue.getSearcher("HeleTeam1").Test() == 2);
 		equals(rescue.getSearcher("HikerTeam1").Test() == 3);
 	}
-	@Test
+	@Test //Grid not made yet 
 	public void testGrid() {
-
-		
 		
 	}
-	@Test
+	
+	@Test//Not sure how to test this
 	public void testImage() {
-
-		
-		
+		rescue = new AlpineRescue("AlpineRescuemap.jpg");
+		rescue.loadGrid();
+		rescue.printGrid();
 	}
 	@Test //need timer class to test
 	public void testAutoMovement() {
@@ -58,7 +57,7 @@ public class part1tests {
 		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
 		
 	}
-	//makes sure the manual position writes in correctly
+	//makes sure the manual position writes in correctly NOTE: IT USES BASE POSITIONS NOT GRIDCELLS
 	@Test
 	public void testManualMovement() {
 		Position dogPos = new Position(110,120);
@@ -82,8 +81,7 @@ public class part1tests {
 		
 	}
 	
-	
-	@Test 
+	@Test //So far, the path only saves where they have been, not spaces in-between NOTE: IT USES BASE POSITIONS NOT GRIDCELLS
 	public void testPathSave() {
 		Position dogvisited = new Position(110, 120);
 		Position helevisited = new Position(200, 500);
