@@ -30,6 +30,7 @@ public class Searcher {
 			break;
 		case "west":
 			direction = Direction.WEST;
+			break;
 		case "east":
 			direction = Direction.EAST;
 			break;

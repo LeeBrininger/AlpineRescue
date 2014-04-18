@@ -27,11 +27,11 @@ public class part1tests {
 		rescue = new AlpineRescue();
 	}
 	
-	@Test 
+	/*@Test 
 	public void testLoad() {
 		rescue = new AlpineRescue("AlpineRescuemap.jpg");
 		
-	}
+	}*/
 	
 	//Tests that the searchers are initialized correctly
 	@Test 
