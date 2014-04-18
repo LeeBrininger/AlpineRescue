@@ -107,15 +107,12 @@ public class part1tests {
 
 		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(100,100)));
 		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(110,120)));
-		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(130,150)));
 		
 		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(200,500)));
 		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(150,500)));
-		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(100,500)));
 		
 		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,200)));
 		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,180)));
-		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,160)));
 		
 		assertFalse(rescue.getSearcher("DogTeam1").getVisited().contains(new Position (111,111)));
 		assertFalse(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position (541,500)));

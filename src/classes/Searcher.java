@@ -53,17 +53,17 @@ public class Searcher {
 	}
 	
 	public void updatePosition(){
-		visited.add(pos);
+		visited.add(new Position(pos));
 		pos.updatePosition(speed, direction);
 		
 	}
 	public void manualPosition(int xpos, int ypos){
-		visited.add(pos);
+		visited.add(new Position(pos));
 		pos.changeX(xpos);
 		pos.changeY(ypos);
 	}
 	public void changeDirection(String newDirection){
-		visited.add(pos);
+		visited.add(new Position(pos));
 		direction = decodeDirection(newDirection);
 	}
 	public void Symbol(){
