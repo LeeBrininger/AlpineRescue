@@ -55,12 +55,12 @@ public class part1tests {
 		
 	}*/
 	
-	@Test
+	/*@Test
 	public void testImage() {
 		rescue = new AlpineRescue("AlpineRescuemap.jpg");
 		rescue.loadGrid();
 		rescue.printGrid();
-	}
+	}*/
 	
 	/*@Test 
 	public void testAutoMovement() {
@@ -89,9 +89,37 @@ public class part1tests {
 		
 	}
 	
-	/*@Test 
+	
+	//tests that the searcher keeps track of the places it has been
+	@Test 
 	public void testPathSave() {
+		rescue.addSearcher("DogTeam1", "dogteam", "north", 10, 100, 100);
+		rescue.getSearcher("DogTeam1").manualPosition(110, 120);
+		rescue.getSearcher("DogTeam1").manualPosition(130, 150);
+
+		rescue.addSearcher("HeleTeam1", "helicopter", "south", 20, 200, 500);
+		rescue.getSearcher("HeleTeam1").manualPosition(150, 500);
+		rescue.getSearcher("HeleTeam1").manualPosition(100, 500);
+
+		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
+		rescue.getSearcher("HikerTeam1").manualPosition(500, 180);
+		rescue.getSearcher("HikerTeam1").manualPosition(500, 160);
+
+		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(100,100)));
+		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(110,120)));
+		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new Position(130,150)));
 		
-	}*/
+		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(200,500)));
+		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(150,500)));
+		assertTrue(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position(100,500)));
+		
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,200)));
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,180)));
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position(500,160)));
+		
+		assertFalse(rescue.getSearcher("DogTeam1").getVisited().contains(new Position (111,111)));
+		assertFalse(rescue.getSearcher("HeleTeam1").getVisited().contains(new Position (541,500)));
+		assertFalse(rescue.getSearcher("HikerTeam1").getVisited().contains(new Position (100,200)));
+	}
 	
 }
