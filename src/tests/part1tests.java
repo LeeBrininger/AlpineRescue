@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import classes.AlpineRescue;
+import classes.Direction;
 import classes.Position;
 
 
@@ -20,12 +21,77 @@ public class part1tests {
 	
 	static AlpineRescue rescue;
 	
-	// Makes a new game and loads configuration files
+	
 	@BeforeClass
 	public static void setup(){ 
 		rescue = new AlpineRescue();
 	}
 	
+	@Test 
+	public void testLoad() {
+		rescue = new AlpineRescue("AlpineRescuemap.jpg");
+		
+	}
 	
+	//Tests that the searchers are initialized correctly
+	@Test 
+	public void testSearchers() {
+		rescue.addSearcher("DogTeam1", "dogteam", "north", 10, 100, 100);
+		rescue.addSearcher("HeleTeam1", "helicopter", "south", 20, 200, 500);
+		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
+		assertEquals("DogTeam1",rescue.getSearcher("DogTeam1").getName());
+		assertEquals("HeleTeam1",rescue.getSearcher("HeleTeam1").getName());
+		assertEquals("HikerTeam1",rescue.getSearcher("HikerTeam1").getName());
+		assertEquals(new Position(100,100), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(new Position(200,500), rescue.getSearcher("HeleTeam1").getPosition());
+		assertEquals(new Position(500,200), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(Direction.NORTH, rescue.getSearcher("DogTeam1").getDirection());
+		assertEquals(Direction.SOUTH, rescue.getSearcher("HeleTeam1").getDirection());
+		assertEquals(Direction.WEST, rescue.getSearcher("HikerTeam1").getDirection());
+		
+	}
+	/*@Test 
+	public void testGrid() {
+		
+	}*/
+	
+	@Test
+	public void testImage() {
+		rescue = new AlpineRescue("AlpineRescuemap.jpg");
+		rescue.loadGrid();
+		rescue.printGrid();
+	}
+	
+	/*@Test 
+	public void testAutoMovement() {
+		rescue.addSearcher("HeleTeam1", "helicopter", "south", 20, 200, 500);
+		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
+		
+	}*/
+	
+	//Tests manual movement of the searchers
+	@Test
+	public void testManualMovement() {
+		
+		rescue.addSearcher("DogTeam1", "dogteam", "north", 10, 100, 100);
+		rescue.getSearcher("DogTeam1").manualPosition(110, 120);
+		
+		rescue.addSearcher("HeleTeam1", "helicopter", "south", 20, 200, 500);
+		rescue.getSearcher("HeleTeam1").manualPosition(150, 500);
+		
+		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
+		rescue.getSearcher("HikerTeam1").manualPosition(500, 180);
+		
+		
+		assertEquals(new Position(110,120), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(new Position(150,500), rescue.getSearcher("HeleTeam1").getPosition());
+		assertEquals( new Position(500,180), rescue.getSearcher("HikerTeam1").getPosition());
+		
+	}
+	
+	/*@Test 
+	public void testPathSave() {
+		
+	}*/
 	
 }

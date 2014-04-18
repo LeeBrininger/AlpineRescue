@@ -12,7 +12,7 @@ public class Searcher {
 	
 	public Searcher(){}
 	
-	public Searcher(String direction, int speed, int xpos, int ypos){
+	public Searcher(String name, String direction, int speed, int xpos, int ypos){
 		
 	}
 	
@@ -33,6 +33,14 @@ public class Searcher {
 	}
 
 	public ArrayList<Position> getVisited(){
+		return null;
+	}
+	
+	public Direction getDirection() {
+		return null;
+	}
+	
+	public String getName() {
 		return null;
 	}
 	

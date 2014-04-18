@@ -10,8 +10,10 @@ public class Position {
 	}
 	
 	public int getY(){
+		return 0;
 	}
 	public int getX(){
+		return 0;
 	}
 	
 	public void changeX(int x){
@@ -21,15 +23,17 @@ public class Position {
 	}
 
 	public void updatePosition(int speed, String direction) {
-		}
+		
 		
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
+		return false;
 	}
 
 	@Override
 	public String toString() {
+		return null;
 	}
 }
