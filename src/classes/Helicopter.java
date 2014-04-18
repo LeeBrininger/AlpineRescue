@@ -14,16 +14,11 @@ public class Helicopter extends Searcher{
 		helpos = new Position(xpos, ypos);
 	}
 	
-	public void Move() {
-		helpos.updatePosition(speed, direction);
-	}
-	public void manualPosition(int xpos, int ypos){
-		helpos.changeX(xpos);
-		helpos.changeY(ypos);
-	}
-	
 	public void Symbol(){
 		
+	}
+	public int Test(){
+		return 2;
 	}
 
 }

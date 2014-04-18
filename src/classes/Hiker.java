@@ -13,17 +13,11 @@ public class Hiker extends Searcher{
 		speed = mph;
 		hikepos = new Position(xpos, ypos);
 	}
-	
-	public void Move() {
-		hikepos.updatePosition(speed, direction);
-	}
-	
-	public void manualPosition(int xpos, int ypos){
-		hikepos.changeX(xpos);
-		hikepos.changeY(ypos);
-	}
-	public void hikerSymbol(){
+
+	public void Symbol(){
 		
 	}
-
+	public int Test(){
+		return 3;
+	}
 }

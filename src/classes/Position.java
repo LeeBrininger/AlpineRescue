@@ -1,8 +1,8 @@
 package classes;
 
 public class Position {
-	private int ypos;
 	private int xpos;
+	private int ypos;
 	
 	public Position(){}
 	
@@ -18,11 +18,12 @@ public class Position {
 		return xpos;
 	}
 	
-	public void changeY(int y){
-		ypos = y;
-	}
 	public void changeX(int x){
 		xpos = x;
+	}
+	
+	public void changeY(int y){
+		ypos = y;
 	}
 
 	public void updatePosition(int speed, String direction) {

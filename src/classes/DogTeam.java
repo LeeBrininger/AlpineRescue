@@ -17,5 +17,8 @@ public class DogTeam extends Searcher{
 	public void Symbol(){
 		
 	}
+	public int Test(){
+		return 1;
+	}
 
 }
