@@ -44,7 +44,7 @@ public class part1tests {
 		assertEquals("HikerTeam1",rescue.getSearcher("HikerTeam1").getName());
 		assertEquals(new Position(100,100), rescue.getSearcher("DogTeam1").getPosition());
 		assertEquals(new Position(200,500), rescue.getSearcher("HeleTeam1").getPosition());
-		assertEquals(new Position(500,200), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(new Position(500,200), rescue.getSearcher("HikerTeam1").getPosition());
 		assertEquals(Direction.NORTH, rescue.getSearcher("DogTeam1").getDirection());
 		assertEquals(Direction.SOUTH, rescue.getSearcher("HeleTeam1").getDirection());
 		assertEquals(Direction.WEST, rescue.getSearcher("HikerTeam1").getDirection());
