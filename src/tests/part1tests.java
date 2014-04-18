@@ -4,10 +4,6 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Random;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
