@@ -22,12 +22,7 @@ public class part1tests {
 	public static void setup(){ 
 		rescue = new AlpineRescue();
 	}
-	
-	/*@Test 
-	public void testLoad() {
-		rescue = new AlpineRescue("AlpineRescuemap.jpg");
-		
-	}*/
+
 	
 	//Tests that the searchers are initialized correctly
 	@Test 
@@ -58,12 +53,20 @@ public class part1tests {
 		rescue.printGrid();
 	}*/
 	
-	/*@Test 
-	public void testAutoMovement() {
-		rescue.addSearcher("HeleTeam1", "helicopter", "south", 20, 200, 500);
+	@Test 
+	public void testAutoMovement() throws InterruptedException {
+		rescue.addSearcher("DogTeam1", "dogteam", "north", 10, 100, 100);
+		rescue.addSearcher("HeleTeam1", "helicopter", "south", 10, 200, 500);
 		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 500, 200);
-		
-	}*/
+		rescue.wait(10);
+		assertEquals(new Position(100,100), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(new Position(100,500), rescue.getSearcher("HeleTeam1").getPosition());
+		assertEquals( new Position(500,150), rescue.getSearcher("HikerTeam1").getPosition());
+		rescue.wait(1);
+		assertEquals(new Position(100,100), rescue.getSearcher("DogTeam1").getPosition());
+		assertEquals(new Position(90,500), rescue.getSearcher("HeleTeam1").getPosition());
+		assertEquals( new Position(500,140), rescue.getSearcher("HikerTeam1").getPosition());
+	}
 	
 	//Tests manual movement of the searchers
 	@Test
