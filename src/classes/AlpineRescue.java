@@ -24,15 +24,15 @@ public class AlpineRescue {
 	public void loadGrid(){
 		grid = new Grid(file);
 	}
-	public void addSearcher(String name, String type, String direction, int speed, int xpos, int ypos) {
+	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 		if(type.equals("dogteam")){
-			searcher = new DogTeam(name, direction, speed, xpos, ypos);
+			searcher = new DogTeam(name, direction, speed, row, column);
 		}
 		if(type.equals("helicopter")){
-			searcher = new Helicopter(name, direction, speed, xpos, ypos);
+			searcher = new Helicopter(name, direction, speed, row, column);
 		}
 		if(type.equals("hiker")){
-			searcher = new Hiker(name, direction, speed, xpos, ypos);
+			searcher = new Hiker(name, direction, speed, row, column);
 		}
 		searchers.put(name, searcher);
 	}

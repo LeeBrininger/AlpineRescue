@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class Searcher {
 	private int speed;
 	private Direction direction;
-	private Position pos;
-	private ArrayList<Position> visited;
+	private ArrayList<GridCell> visited;
 	private String name;
+	private GridCell cell;
 	
 	public Searcher(){}
 	
 	public Searcher(String name, String direction, int speed, int xpos, int ypos){
 		this.name = name;
-		visited = new ArrayList<Position>();
-		pos = new Position(xpos, ypos);
+		visited = new ArrayList<GridCell>();
+		cell = new GridCell(xpos, ypos);
 		this.speed = speed;
 		this.direction = decodeDirection(direction);
 	}
@@ -53,28 +53,25 @@ public class Searcher {
 	}
 	
 	public void updatePosition(){
-		visited.add(new Position(pos));
-		pos.updatePosition(speed, direction);
+		visited.add(new GridCell(cell));
+		cell.updatePosition(speed, direction);
 		
 	}
-	public void manualPosition(int xpos, int ypos){
-		visited.add(new Position(pos));
-		pos.changeX(xpos);
-		pos.changeY(ypos);
+	public void manualPosition(int row, int column){
+		visited.add(new GridCell(cell));
+		cell.changeCell(row, column);
 	}
 	public void changeDirection(String newDirection){
-		visited.add(new Position(pos));
+		visited.add(new GridCell(cell));
 		direction = decodeDirection(newDirection);
 	}
 	public void Symbol(){
-		
-	}
-	
-	public Position getPosition(){
-		return pos;
 	}
 
-	public ArrayList<Position> getVisited(){
+	public GridCell getCell(){
+		return cell;
+	}
+	public ArrayList<GridCell> getVisited(){
 		return visited;
 	}
 	
