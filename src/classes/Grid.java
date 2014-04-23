@@ -28,6 +28,20 @@ public class Grid {
 		image.printImage(file);
 	}
 	
+	// get the cell at column, row
+	//defined as column first because player x coordinate is column
+	public GridCell getCellAt(int column, int row) {
+		return cells.get(row*this.getNumRows() + column);
+	}
+	
+	public int getNumRows() {
+		return Grid.numRows;
+	}
+	
+	public int getNumColumns() {
+		return Grid.numColumns;
+	}
+	
 	//used for testing
 	public ArrayList<GridCell> getCellsArray() {
 		return cells;

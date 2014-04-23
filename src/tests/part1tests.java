@@ -45,7 +45,8 @@ public class part1tests {
 	
 	@Test 
 	public void testGrid() {
-		assertEquals(rescue.getGrid().getCellsArray().size(), Grid.numColumns * Grid.numRows);
+		assertEquals(rescue.getGrid().getCellsArray().size(), 
+				rescue.getGrid().getNumRows() * rescue.getGrid().getNumColumns());
 	}
 	
 	/*@Test
