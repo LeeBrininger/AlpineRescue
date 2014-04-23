@@ -11,6 +11,8 @@ public class Grid {
 	public static final int numColumns = 10;
 	
 	public Grid() {
+		cells = new ArrayList<GridCell>();
+		
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numRows; j++) {
 				cells.add(new GridCell());

@@ -11,12 +11,14 @@ public class AlpineRescue {
 	private Map<String, Searcher> searchers;
 	
 	public AlpineRescue(){
+		super();
 		searchers = new HashMap<String, Searcher>();
+		grid = new Grid();
 	}
 	
 	public AlpineRescue(String mapfile){
+		this();
 		file = mapfile;
-		searchers = new HashMap<String, Searcher>();
 	}
 	
 	public void loadGrid(){
