@@ -10,7 +10,7 @@ public class Grid {
 	public static final int numRows = 10;
 	public static final int numColumns = 10;
 	
-	public Grid(){
+	public Grid() {
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numRows; j++) {
 				cells.add(new GridCell());
@@ -25,4 +25,10 @@ public class Grid {
 	public void printImage(){
 		image.printImage(file);
 	}
+	
+	//used for testing
+	public ArrayList<GridCell> getCellsArray() {
+		return cells;
+	}
+	
 }

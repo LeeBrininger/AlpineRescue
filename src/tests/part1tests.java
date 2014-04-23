@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import classes.AlpineRescue;
 import classes.Direction;
+import classes.Grid;
 import classes.Position;
 
 
@@ -41,10 +42,11 @@ public class part1tests {
 		assertEquals(Direction.WEST, rescue.getSearcher("HikerTeam1").getDirection());
 		
 	}
-	/*@Test 
+	
+	@Test 
 	public void testGrid() {
-		
-	}*/
+		assertEquals(rescue.getGrid().getCellsArray().size(), Grid.numColumns * Grid.numRows);
+	}
 	
 	/*@Test
 	public void testImage() {

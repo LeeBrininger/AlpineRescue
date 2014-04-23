@@ -42,5 +42,10 @@ public class AlpineRescue {
 	public void printGrid(){
 		grid.printImage();
 	}
+	
+	
+	public Grid getGrid() {
+		return grid;
+	}
 
 }
