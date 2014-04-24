@@ -1,5 +1,7 @@
 package classes;
 
-public class ControlPanel {
+import javax.swing.JPanel;
+
+public class ControlPanel extends JPanel{
 	
 }

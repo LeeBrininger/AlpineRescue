@@ -5,30 +5,46 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class AlpineRescue {
+public class AlpineRescue extends JPanel{
 	private Timer timer;
 	private final int TIMER_DELAY = 400;
 	private String file = "AlpineRescuemap.jpg";
+	private final static String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
 	private boolean isPaused;
 	
 	public AlpineRescue(){
-		searchers = new HashMap<String, Searcher>();
+		this(DEFAULT_FILE);
+		/*searchers = new HashMap<String, Searcher>();
 		grid = new Grid();
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
+		
+		ControlPanel control = new ControlPanel();
+		add(control);*/
 	}
 	
 	public AlpineRescue(String mapfile){
+		searchers = new HashMap<String, Searcher>();
 		file = mapfile;
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
+		loadGrid();
+		ControlPanel control = new ControlPanel();
+		add(control);
+	}
+	
+	public static void main(String[] args){
+		AlpineRescue rescue = new AlpineRescue();
+		
 	}
 	
 	public void loadGrid(){

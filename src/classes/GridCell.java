@@ -1,4 +1,6 @@
 package classes;
+
+import java.awt.Graphics;
 	
 	
 public class GridCell {
@@ -43,6 +45,11 @@ public class GridCell {
 		this.row = row;
 		this.column = column;
 	}
+	
+	public void draw(Graphics g){
+		
+	}
+	
 	public void updatePosition(int speed, Direction direction) {
 		switch (direction) {
 		case NORTH:

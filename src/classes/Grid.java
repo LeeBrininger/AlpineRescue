@@ -22,6 +22,7 @@ public class Grid {
 	}
 	
 	public Grid(String files){
+		this();
 		file = files;
 	}
 
