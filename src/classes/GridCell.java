@@ -46,32 +46,32 @@ public class GridCell {
 	public void updatePosition(int speed, Direction direction) {
 		switch (direction) {
 		case NORTH:
-			column +=speed;
+			row +=speed;
 			break;
 		case SOUTH:
-			column -= speed;
+			row -= speed;
 			break;
 		case EAST:
-			row+=speed;
+			column+=speed;
 			break;
 		case WEST:
-			row-=speed;
+			column-=speed;
 			break;
 		case NORTHEAST:
-			column+=speed/2;
-			row+=speed/2;
+			column+=speed;
+			row+=speed;
 			break;
 		case NORTHWEST:
-			column+=speed/2;
-			row-=speed/2;
+			row+=speed;
+			column-=speed;
 			break;
 		case SOUTHWEST:
-			column-=speed/2;
-			row-=speed/2;
+			column-=speed;
+			row-=speed;
 			break;
 		case SOUTHEAST:
-			column-=speed/2;
-			row+=speed/2;
+			row-=speed;
+			column+=speed;
 			break;
 		}
 		
@@ -92,6 +92,6 @@ public class GridCell {
 
 	@Override
 	public String toString() {
-		return "Position: (" + row + ", " + column +")";
+		return "(" + row + ", " + column +")";
 	}
 }

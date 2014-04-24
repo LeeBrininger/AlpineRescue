@@ -1,24 +1,34 @@
 package classes;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Timer;
+
 public class AlpineRescue {
-	private int time;
+	private Timer timer;
+	private final int TIMER_DELAY = 400;
 	private String file = "AlpineRescuemap.jpg";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
+	private boolean isPaused;
 	
 	public AlpineRescue(){
-		super();
 		searchers = new HashMap<String, Searcher>();
 		grid = new Grid();
+		timer = new Timer(TIMER_DELAY, new TimerListener(this));
+		timer.start();
+		isPaused = false;
 	}
 	
 	public AlpineRescue(String mapfile){
-		this();
 		file = mapfile;
+		timer = new Timer(TIMER_DELAY, new TimerListener(this));
+		timer.start();
+		isPaused = false;
 	}
 	
 	public void loadGrid(){
@@ -41,13 +51,37 @@ public class AlpineRescue {
 		return searchers.get(name);
 	}
 	
+	public Map<String,Searcher> getSearchers() {
+		return searchers;
+	}
+	
 	public void printGrid(){
 		grid.printImage();
 	}
 	
-	
 	public Grid getGrid() {
 		return grid;
+	}
+	
+	public void pause() {
+		isPaused = !isPaused;
+		if (isPaused) timer.start();
+		else timer.stop();
+	}
+	
+	class TimerListener implements ActionListener {
+
+		private AlpineRescue rescue;
+		
+		public TimerListener(AlpineRescue rescue) {
+			this.rescue = rescue;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (Searcher searcher : rescue.getSearchers().values()) searcher.updatePosition();
+		}
+		
 	}
 
 }
