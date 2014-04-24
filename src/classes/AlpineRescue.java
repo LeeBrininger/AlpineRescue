@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class AlpineRescue extends JPanel{
+public class AlpineRescue extends JFrame{
 	private Timer timer;
 	private final int TIMER_DELAY = 400;
 	private String file = "AlpineRescuemap.jpg";
@@ -38,13 +39,18 @@ public class AlpineRescue extends JPanel{
 		timer.start();
 		isPaused = false;
 		loadGrid();
+		
+		//GUI initialization
+		setSize(new Dimension(900, 720));
+		setTitle("Alpine Rescue");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ControlPanel control = new ControlPanel();
 		add(control);
 	}
 	
 	public static void main(String[] args){
 		AlpineRescue rescue = new AlpineRescue();
-		
+		rescue.setVisible(true);
 	}
 	
 	public void loadGrid(){
