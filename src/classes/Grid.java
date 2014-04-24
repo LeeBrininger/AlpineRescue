@@ -7,14 +7,15 @@ public class Grid {
 	private loadImage image;
 	private ArrayList<GridCell> cells;
 	
+	//project should be set up so that these sizes can change
 	public static final int numRows = 10;
-	public static final int numColumns = 10;
+	public static final int numColumns = 100;
 	
 	public Grid() {
 		cells = new ArrayList<GridCell>();
 		
 		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numRows; j++) {
+			for (int j = 0; j < numColumns; j++) {
 				cells.add(new GridCell());
 			}
 		}
