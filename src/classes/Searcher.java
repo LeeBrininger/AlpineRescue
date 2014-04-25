@@ -11,15 +11,16 @@ public class Searcher {
 	
 	public Searcher(){}
 	
-	public Searcher(String name, String direction, int speed, int xpos, int ypos){
+	public Searcher(String name, String direction, int speed, int x, int y, Grid grid){
 		this.name = name;
 		visited = new ArrayList<GridCell>();
-		cell = new GridCell(xpos, ypos);
+		cell = grid.getCellAt(y,x);
 		this.speed = speed;
 		this.direction = decodeDirection(direction);
 	}
 	
 	public Direction decodeDirection(String dir) {
+		dir = dir.toLowerCase();
 		Direction direction;
 		switch(dir) {
 		case "north":
@@ -52,14 +53,48 @@ public class Searcher {
 		return direction;
 	}
 	
-	public void updatePosition(){
+	public void move(Grid grid){
 		visited.add(new GridCell(cell));
-		cell.updatePosition(speed, direction);
+		int row = cell.getRow();
+		int column = cell.getColumn();
+		switch (direction) {
+		case NORTH:
+			row -=speed;
+			break;
+		case SOUTH:
+			row += speed;
+			break;
+		case EAST:
+			column+=speed;
+			break;
+		case WEST:
+			column-=speed;
+			break;
+		case NORTHEAST:
+			column+=speed;
+			row-=speed;
+			break;
+		case NORTHWEST:
+			row-=speed;
+			column-=speed;
+			break;
+		case SOUTHWEST:
+			column-=speed;
+			row+=speed;
+			break;
+		case SOUTHEAST:
+			row+=speed;
+			column+=speed;
+			break;
+		}
 		
+		cell = grid.getCellAt(row,column);
+		cell.setSearched();
 	}
-	public void manualPosition(int row, int column){
+	public void manualPositionUpdate(int row, int column, Grid grid){
 		visited.add(new GridCell(cell));
-		cell.changeCell(row, column);
+		cell = grid.getCellAt(row,column);
+		cell.setSearched();
 	}
 	public void changeDirection(String newDirection){
 		visited.add(new GridCell(cell));
@@ -67,7 +102,7 @@ public class Searcher {
 	}
 	public void Symbol(){
 	}
-
+	
 	public GridCell getCell(){
 		return cell;
 	}

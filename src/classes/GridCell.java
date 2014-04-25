@@ -20,6 +20,7 @@ public class GridCell{
 		isSearched = false;
 		this.row = row;
 		this.column = column;
+
 	}
 	
 	public GridCell (GridCell cell) {
@@ -35,49 +36,11 @@ public class GridCell{
 		return row;
 	}
 	public int getColumn(){
-		return row;
+		return column;
 	}
 	//can be used to set isSearched to either true or false
 	public void setSearched(boolean setValue) {
 		isSearched = setValue;
-	}
-	
-	public void changeCell(int row, int column){
-		this.row = row;
-		this.column = column;
-	}
-	public void updatePosition(int speed, Direction direction) {
-		switch (direction) {
-		case NORTH:
-			row +=speed;
-			break;
-		case SOUTH:
-			row -= speed;
-			break;
-		case EAST:
-			column+=speed;
-			break;
-		case WEST:
-			column-=speed;
-			break;
-		case NORTHEAST:
-			column+=speed;
-			row+=speed;
-			break;
-		case NORTHWEST:
-			row+=speed;
-			column-=speed;
-			break;
-		case SOUTHWEST:
-			column-=speed;
-			row-=speed;
-			break;
-		case SOUTHEAST:
-			row-=speed;
-			column+=speed;
-			break;
-		}
-		
 	}
 	
 	@Override
