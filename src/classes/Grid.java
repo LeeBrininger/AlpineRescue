@@ -1,8 +1,11 @@
 package classes;
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Grid {
 	private String file;
@@ -23,9 +26,27 @@ public class Grid {
 		}
 	}
 	
-	public Grid(String files){
-		this();
-		file = files;
+	public Grid(String file){
+		this.file = file;
+		try {
+			FileReader reader = new FileReader(file);
+			Scanner scan = new Scanner(reader);
+			String line = scan.nextLine();
+			String[] splitLine = line.split(",");
+			int rows = Integer.parseInt(splitLine[0]);
+			int columns = Integer.parseInt(splitLine[1]);
+			
+			for (int i=0; i<rows; i++) {
+				for (int j=0; j<columns; j++) {
+					
+				}
+			}
+		
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void printImage(){
