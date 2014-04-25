@@ -45,9 +45,10 @@ public class Grid {
 	public int getNumColumns() {
 		return Grid.numColumns;
 	}
-	public void printCells(){
-		for(int i = 0; i < 50; i++){
-			cells.get(i).draw(null);//TODO
+	
+	public void paintComponent(Graphics g){
+		for(GridCell i : cells){
+			i.draw(g);//TODO
 		}
 	}
 	
