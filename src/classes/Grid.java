@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Grid {
@@ -48,5 +49,4 @@ public class Grid {
 	public ArrayList<GridCell> getCellsArray() {
 		return cells;
 	}
-	
 }
