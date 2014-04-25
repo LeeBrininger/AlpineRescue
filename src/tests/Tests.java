@@ -13,7 +13,7 @@ import classes.Grid;
 import classes.GridCell;
 
 
-public class part1tests {
+public class Tests {
 	
 	private AlpineRescue rescue;
 	private Grid grid;
