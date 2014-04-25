@@ -1,7 +1,12 @@
 package classes;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 	
 	
-public class GridCell {
+public class GridCell{
 	private int row;
 	private int column;
 	private boolean isSearched;
@@ -53,5 +58,12 @@ public class GridCell {
 	@Override
 	public String toString() {
 		return "(" + row + ", " + column +")";
+	}
+	
+	public void draw(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		Rectangle rect = new Rectangle(getColumn()*25, getRow()*25, 25, 25);
+		g2.setColor(Color.BLACK);
+		g2.draw(rect);
 	}
 }

@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class Grid {
 	}
 	
 	public Grid(String files){
+		this();
 		file = files;
 	}
 
@@ -48,5 +50,4 @@ public class Grid {
 	public ArrayList<GridCell> getCellsArray() {
 		return cells;
 	}
-	
 }

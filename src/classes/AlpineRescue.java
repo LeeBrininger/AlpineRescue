@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -14,24 +15,43 @@ public class AlpineRescue extends JFrame{
 	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 400;
 	private String file = "AlpineRescuemap.jpg";
+	private final static String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
 	private boolean isPaused;
 	
 	public AlpineRescue(){
-		searchers = new HashMap<String, Searcher>();
+		this(DEFAULT_FILE);
+		/*searchers = new HashMap<String, Searcher>();
 		grid = new Grid();
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
+		
+		ControlPanel control = new ControlPanel();
+		add(control);*/
 	}
 	
 	public AlpineRescue(String mapfile){
+		searchers = new HashMap<String, Searcher>();
 		file = mapfile;
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
+		loadGrid();
+		
+		//GUI initialization
+		setSize(new Dimension(900, 720));
+		setTitle("Alpine Rescue");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ControlPanel control = new ControlPanel();
+		add(control);
+	}
+	
+	public static void main(String[] args){
+		AlpineRescue rescue = new AlpineRescue();
+		rescue.setVisible(true);
 	}
 	
 	public void loadGrid(){
