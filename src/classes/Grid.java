@@ -27,7 +27,26 @@ public class Grid {
 	}
 	
 	public Grid(String file){
+		this.file = file;
+		try {
+			FileReader reader = new FileReader(file);
+			Scanner scan = new Scanner(reader);
+			String line = scan.nextLine();
+			String[] splitLine = line.split(",");
+			int rows = Integer.parseInt(splitLine[0]);
+			int columns = Integer.parseInt(splitLine[1]);
+			
+			for (int i=0; i<rows; i++) {
+				for (int j=0; j<columns; j++) {
+					
+				}
+			}
 		
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void printImage(){

@@ -140,7 +140,7 @@ public class part1tests {
 			if (cell.getRow() == 20 && cell.getColumn() ==20) assertTrue(cell.isOccupied());
 			else if (cell.getRow() == 1 && cell.getColumn() == 36) assertTrue(cell.isOccupied());
 			else if (cell.getRow() == 14 && cell.getColumn() == 17) assertTrue(cell.isOccupied());
-		
+			else assertFalse(cell.isOccupied());
 		}
 	}
 	
