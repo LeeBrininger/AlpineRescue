@@ -1,21 +1,22 @@
 package classes;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 	
 	
-public class GridCell {
+public class GridCell{
 	private int row;
 	private int column;
 	private boolean isSearched;
 	private boolean isOccupied;
 	
 	public GridCell () {
-		super();
 		isSearched = false;
 	}
 	
 	public GridCell (int row, int column) {
-		super();
 		isSearched = false;
 		this.row = row;
 		this.column = column;
@@ -45,11 +46,6 @@ public class GridCell {
 		this.row = row;
 		this.column = column;
 	}
-	
-	public void draw(Graphics g){
-		
-	}
-	
 	public void updatePosition(int speed, Direction direction) {
 		switch (direction) {
 		case NORTH:
@@ -100,5 +96,12 @@ public class GridCell {
 	@Override
 	public String toString() {
 		return "(" + row + ", " + column +")";
+	}
+	
+	public void draw(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		Rectangle rect = new Rectangle(getColumn()*25, getRow()*25, 25, 25);
+		g2.setColor(Color.BLACK);
+		g2.draw(rect);
 	}
 }
