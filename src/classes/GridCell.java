@@ -37,6 +37,14 @@ public class GridCell{
 	public int getColumn(){
 		return column;
 	}
+	
+	public void setOccupied(boolean occupied) {
+		isOccupied = occupied;
+	}
+	
+	public boolean isOccupied() {
+		return isOccupied;
+	}
 	//can be used to set isSearched to either true or false
 	public void setSearched(boolean setValue) {
 		isSearched = setValue;

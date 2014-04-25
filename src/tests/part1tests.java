@@ -127,9 +127,21 @@ public class part1tests {
 		assertFalse(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(10,20)));
 	}
 	
-	/*@Test
+	@Test
+	public void testEmptyGrid() {
+		grid = new Grid("defaultconfig.csv");
+		for (GridCell cell : grid.getCellsArray()) assertFalse(cell.isOccupied());
+	}
+	
+	
 	public void testNonEmptyGridConfig() {
+		grid = new Grid("occupiedgrid.csv");
+		for (GridCell cell : grid.getCellsArray()) { 
+			if (cell.getRow() == 20 && cell.getColumn() ==20) assertTrue(cell.isOccupied());
+			else if (cell.getRow() == 1 && cell.getColumn() == 36) assertTrue(cell.isOccupied());
+			else if (cell.getRow() == 14 && cell.getColumn() == 17) assertTrue(cell.isOccupied());
 		
-	}*/
+		}
+	}
 	
 }

@@ -1,8 +1,11 @@
 package classes;
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Grid {
 	private String file;
@@ -23,9 +26,8 @@ public class Grid {
 		}
 	}
 	
-	public Grid(String files){
-		this();
-		file = files;
+	public Grid(String file){
+		
 	}
 
 	public void printImage(){

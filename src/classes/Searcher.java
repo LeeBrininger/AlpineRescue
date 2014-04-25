@@ -15,6 +15,7 @@ public class Searcher {
 		this.name = name;
 		visited = new ArrayList<GridCell>();
 		cell = grid.getCellAt(y,x);
+		cell.setOccupied(true);
 		this.speed = speed;
 		this.direction = decodeDirection(direction);
 	}
@@ -87,14 +88,17 @@ public class Searcher {
 			column+=speed;
 			break;
 		}
-		
+		cell.setOccupied(false);
 		cell = grid.getCellAt(row,column);
 		cell.setSearched();
+		cell.setOccupied(true);
 	}
 	public void manualPositionUpdate(int row, int column, Grid grid){
+		cell.setOccupied(false);
 		visited.add(new GridCell(cell));
 		cell = grid.getCellAt(row,column);
 		cell.setSearched();
+		cell.setOccupied(true);
 	}
 	public void changeDirection(String newDirection){
 		visited.add(new GridCell(cell));
