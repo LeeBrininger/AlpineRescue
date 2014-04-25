@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Grid {
+import javax.swing.JPanel;
+
+public class Grid extends JPanel{
 	private String file;
 	private loadImage image;
 	private ArrayList<GridCell> cells;

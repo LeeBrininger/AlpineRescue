@@ -43,11 +43,12 @@ public class AlpineRescue extends JFrame{
 		loadGrid();
 		
 		//GUI initialization
-		setSize(new Dimension(900, 720));
+		setSize(new Dimension(625, 875));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ControlPanel control = new ControlPanel();
 		add(BorderLayout.SOUTH, control);
+		add(BorderLayout.CENTER, grid);
 	}
 	
 	public static void main(String[] args){
@@ -56,7 +57,7 @@ public class AlpineRescue extends JFrame{
 	}
 	
 	public void loadGrid(){
-		grid = new Grid(file);
+		grid = new Grid();//file);
 	}
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 		if(type.equals("dogteam")){
