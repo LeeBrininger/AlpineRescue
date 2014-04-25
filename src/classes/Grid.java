@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Grid {
 	private String file;
@@ -8,15 +9,15 @@ public class Grid {
 	private ArrayList<GridCell> cells;
 	
 	//project should be set up so that these sizes can change
-	public static final int numRows = 10;
-	public static final int numColumns = 100;
+	public static final int numRows = 50;
+	public static final int numColumns = 50;
 	
 	public Grid() {
 		cells = new ArrayList<GridCell>();
 		
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
-				cells.add(new GridCell());
+				cells.add(new GridCell(i,j));
 			}
 		}
 	}
@@ -31,8 +32,8 @@ public class Grid {
 	
 	// get the cell at column, row
 	//defined as column first because player x coordinate is column
-	public GridCell getCellAt(int column, int row) {
-		return cells.get(row*this.getNumRows() + column);
+	public GridCell getCellAt(int row, int column) {
+		return cells.get(row*this.getNumColumns() + column);
 	}
 	
 	public int getNumRows() {

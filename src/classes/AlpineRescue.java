@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
-public class AlpineRescue {
+@SuppressWarnings("serial")
+public class AlpineRescue extends JFrame{
 	private Timer timer;
+	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 400;
 	private String file = "AlpineRescuemap.jpg";
 	private Grid grid;
@@ -36,13 +39,13 @@ public class AlpineRescue {
 	}
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 		if(type.equals("dogteam")){
-			searcher = new DogTeam(name, direction, speed, row, column);
+			searcher = new DogTeam(name, direction, speed, row, column, grid);
 		}
 		if(type.equals("helicopter")){
-			searcher = new Helicopter(name, direction, speed, row, column);
+			searcher = new Helicopter(name, direction, speed, row, column, grid);
 		}
 		if(type.equals("hiker")){
-			searcher = new Hiker(name, direction, speed, row, column);
+			searcher = new Hiker(name, direction, speed, row, column,grid);
 		}
 		searchers.put(name, searcher);
 	}
@@ -79,7 +82,7 @@ public class AlpineRescue {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (Searcher searcher : rescue.getSearchers().values()) searcher.updatePosition();
+			for (Searcher searcher : rescue.getSearchers().values()) searcher.move(grid);
 		}
 		
 	}
