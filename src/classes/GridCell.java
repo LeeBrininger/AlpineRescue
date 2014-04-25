@@ -10,12 +10,12 @@ public class GridCell {
 	private boolean isOccupied;
 	
 	public GridCell () {
-		super();
+		//super();
 		isSearched = false;
 	}
 	
 	public GridCell (int row, int column) {
-		super();
+		//super();
 		isSearched = false;
 		this.row = row;
 		this.column = column;

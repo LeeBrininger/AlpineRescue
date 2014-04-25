@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +46,7 @@ public class AlpineRescue extends JFrame{
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ControlPanel control = new ControlPanel();
-		add(control);
+		add(BorderLayout.SOUTH, control);
 	}
 	
 	public static void main(String[] args){
