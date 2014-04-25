@@ -20,6 +20,7 @@ public class GridCell{
 		isSearched = false;
 		this.row = row;
 		this.column = column;
+
 	}
 	
 	public GridCell (GridCell cell) {

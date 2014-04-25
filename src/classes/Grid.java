@@ -44,6 +44,12 @@ public class Grid {
 	public int getNumColumns() {
 		return Grid.numColumns;
 	}
+	public void printCells(){
+		for(int i = 0; i < 50; i++){
+			cells.get(i).draw(null);//TODO
+		}
+	}
+	
 	
 	//used for testing
 	public ArrayList<GridCell> getCellsArray() {
