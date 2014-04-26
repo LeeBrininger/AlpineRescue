@@ -56,7 +56,7 @@ public class AlpineRescue extends JFrame{
 	}
 	
 	public void loadGrid(){
-		grid = new Grid(file);
+		grid = new Grid();
 	}
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 		if(type.equals("dogteam")){
