@@ -5,8 +5,8 @@ public class Helicopter extends Searcher{
 	public Helicopter(){}
 	
 	
-	public Helicopter(String name, String direction, int speed, int x, int y, Grid grid){
-		super(name,direction,speed,x,y, grid);
+	public Helicopter(String name, String direction, int speed, int row, int column, Grid grid){
+		super(name,direction,speed,row,column, grid);
 	}
 	
 	public void Symbol(){

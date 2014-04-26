@@ -4,12 +4,12 @@ import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Grid extends JPanel{
 	private loadImage image;
 	private String pictureFile;
@@ -29,8 +29,7 @@ public class Grid extends JPanel{
 		}
 	}
 	
-	public Grid(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, int speed, String direction){
-		cells = new ArrayList<GridCell>();
+	public void loadConfig(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, int speed, String direction) {
 		try {
 			FileReader reader = new FileReader(gridFile);
 			Scanner scan = new Scanner(reader);
@@ -42,28 +41,22 @@ public class Grid extends JPanel{
 			
 			numRows = Integer.parseInt(splitLine[0]);
 			numColumns = Integer.parseInt(splitLine[1]);
-			
-			int row = 0;
-			int column = 0;
+		
+			int index = 0;
 			int numSearchers = 1;
 			
 			while(scan.hasNextLine()) {
-				
 				line = scan.nextLine();
 				splitLine = line.split(",");
 				for (String s : splitLine) {
-					GridCell cell = new GridCell(row,column);
+					GridCell cell = cells.get(index);
 					cells.add(cell);
 					if (searcherConfig.containsKey(s)) {
-						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, speed, row, column);
+						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, speed, cell.getRow(), cell.getColumn());
 						numSearchers++;
 						cell.setOccupied(true);
 					}
-					column++;
-					if (column == numColumns) {
-						row++;
-						column=0;
-					}
+					index++;
 				}
 				
 			}
@@ -73,7 +66,6 @@ public class Grid extends JPanel{
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		
 		
 	}
 	

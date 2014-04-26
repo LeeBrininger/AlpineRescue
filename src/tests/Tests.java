@@ -61,6 +61,7 @@ public class Tests {
 
 	@Test 
 	public void testAutoMovement() throws InterruptedException {
+		rescue.pause();
 		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
 		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 3, 49, 20);
 		rescue.addSearcher("HikerTeam1", "Hiker", "west", 2, 20, 49);
@@ -129,18 +130,25 @@ public class Tests {
 	
 	@Test
 	public void testEmptyGrid() {
-		grid = new Grid(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
+		grid.loadConfig(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
 		for (GridCell cell : grid.getCellsArray()) assertFalse(cell.isOccupied());
 	}
 	
-	
+	@Test
 	public void testNonEmptyGridConfig() {
-		grid = new Grid(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
-		for (GridCell cell : grid.getCellsArray()) { 
-			if (cell.getRow() == 20 && cell.getColumn() ==20) assertTrue(cell.isOccupied());
-			else if (cell.getRow() == 1 && cell.getColumn() == 36) assertTrue(cell.isOccupied());
+		grid=new Grid();
+		grid.loadConfig(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
+		for (GridCell cell : grid.getCellsArray()) {
+			
+			if (cell.getRow() == 20 && cell.getColumn() ==20)
+				assertTrue(cell.isOccupied());
+			else if (cell.getRow() == 1 && cell.getColumn() == 36) {
+				assertTrue(cell.isOccupied());
+			}
 			else if (cell.getRow() == 14 && cell.getColumn() == 17) assertTrue(cell.isOccupied());
-			else assertFalse(cell.isOccupied());
+			else {
+				assertFalse(cell.isOccupied());
+			}
 		}
 	}
 	

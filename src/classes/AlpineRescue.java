@@ -17,12 +17,12 @@ import javax.swing.Timer;
 public class AlpineRescue extends JFrame{
 	private Timer timer;
 	// timer delay is in MILLISECONDS
-	private final int TIMER_DELAY = 400;
+	private final int TIMER_DELAY = 1000;
 	private String mapFile = "AlpineRescuemap.jpg";
 	private final static String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
 	private static final String DEFAULT_SEARCHER_CONFIG = "searcherConfig.csv";
 	private final int DEFAULT_SPEED = 1;
-	private final String DEFAULT_DIRECTION = "NORTH";
+	private final String DEFAULT_DIRECTION = "SOUTH";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
@@ -33,8 +33,7 @@ public class AlpineRescue extends JFrame{
 		searchers = new HashMap<String, Searcher>();
 		grid = new Grid();
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
-		timer.start();
-		isPaused = false;
+		isPaused = true;
 		searcherMap = new HashMap<String,String>();
 		loadConfig(DEFAULT_SEARCHER_CONFIG);
 		ControlPanel control = new ControlPanel();
@@ -45,11 +44,11 @@ public class AlpineRescue extends JFrame{
 		searchers = new HashMap<String, Searcher>();
 		this.mapFile = mapFile;
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
-		timer.start();
-		isPaused = false;
+		isPaused = true;
 		searcherMap = new HashMap<String,String>();
 		loadConfig(searcherConfig);
-		grid = new Grid(this, gridFile, mapFile, searcherMap, DEFAULT_SPEED, DEFAULT_DIRECTION);
+		grid = new Grid();
+		grid.loadConfig(this, gridFile, mapFile, searcherMap, DEFAULT_SPEED, DEFAULT_DIRECTION);
 		
 		//GUI initialization
 		setSize(new Dimension(625, 875));
@@ -120,8 +119,12 @@ public class AlpineRescue extends JFrame{
 	
 	public void pause() {
 		isPaused = !isPaused;
-		if (isPaused) timer.start();
+		if (!isPaused) timer.start();
 		else timer.stop();
+	}
+	
+	public boolean isPaused() {
+		return isPaused;
 	}
 	
 	class TimerListener implements ActionListener {
@@ -135,12 +138,14 @@ public class AlpineRescue extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			for (Searcher searcher : rescue.getSearchers().values()) searcher.move(grid);
+			grid.repaint();
 		}
 		
 	}
 	
 	public static void main(String[] args){
-		AlpineRescue rescue = new AlpineRescue("defaultconfig.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
+		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
+		rescue.pause();
 		rescue.setVisible(true);
 	}
 	

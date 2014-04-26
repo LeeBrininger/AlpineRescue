@@ -2,8 +2,6 @@ package classes;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
 	
 	
 public class GridCell{
@@ -20,7 +18,7 @@ public class GridCell{
 		isSearched = false;
 		this.row = row;
 		this.column = column;
-
+		isOccupied=false;
 	}
 	
 	public GridCell (GridCell cell) {
@@ -70,13 +68,18 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
-		//Graphics2D g2 = (Graphics2D) g;
-		g.setColor(Color.BLACK);
-		//Rectangle rect = new Rectangle(getColumn()*25, getRow()*25, 25, 25);
-		g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+	
 		if (isOccupied) {
 			g.setColor(Color.YELLOW);
-			g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+			g.fillRect(getColumn()*12, getRow()*12, 12, 12);
+		} else if (isSearched) {
+			g.setColor(Color.RED);
+			g.fillRect(getColumn()*12,getRow()*12,12,12);
 		}
+		
+			g.setColor(Color.BLACK);
+			g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+		
+		
 	}
 }

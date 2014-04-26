@@ -11,13 +11,14 @@ public class Searcher {
 	
 	public Searcher(){}
 	
-	public Searcher(String name, String direction, int speed, int x, int y, Grid grid){
+	public Searcher(String name, String direction, int speed, int row, int column, Grid grid){
 		this.name = name;
 		visited = new ArrayList<GridCell>();
-		cell = grid.getCellAt(y,x);
+		cell = grid.getCellAt(row,column);
 		cell.setOccupied(true);
 		this.speed = speed;
 		this.direction = decodeDirection(direction);
+		grid.repaint();
 	}
 	
 	public Direction decodeDirection(String dir) {
@@ -88,16 +89,18 @@ public class Searcher {
 			column+=speed;
 			break;
 		}
+
+		cell.setSearched();
 		cell.setOccupied(false);
 		cell = grid.getCellAt(row,column);
-		cell.setSearched();
 		cell.setOccupied(true);
 	}
 	public void manualPositionUpdate(int row, int column, Grid grid){
 		cell.setOccupied(false);
+
+		cell.setSearched();
 		visited.add(new GridCell(cell));
 		cell = grid.getCellAt(row,column);
-		cell.setSearched();
 		cell.setOccupied(true);
 	}
 	public void changeDirection(String newDirection){
