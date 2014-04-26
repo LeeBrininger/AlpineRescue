@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -15,60 +18,76 @@ public class AlpineRescue extends JFrame{
 	private Timer timer;
 	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 400;
-	private String file = "AlpineRescuemap.jpg";
+	private String mapFile = "AlpineRescuemap.jpg";
 	private final static String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
+	private static final String DEFAULT_SEARCHER_CONFIG = "searcherConfig.csv";
+	private final int DEFAULT_SPEED = 1;
+	private final String DEFAULT_DIRECTION = "NORTH";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
+	private Map<String, String> searcherMap;
 	private boolean isPaused;
 	
 	public AlpineRescue(){
-		this(DEFAULT_FILE);
-		/*searchers = new HashMap<String, Searcher>();
+		searchers = new HashMap<String, Searcher>();
 		grid = new Grid();
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
-		
+		searcherMap = new HashMap<String,String>();
+		loadConfig(DEFAULT_SEARCHER_CONFIG);
 		ControlPanel control = new ControlPanel();
-		add(control);*/
+		add(control);
 	}
 	
-	public AlpineRescue(String mapfile){
+	public AlpineRescue(String gridFile, String searcherConfig, String mapFile){
 		searchers = new HashMap<String, Searcher>();
-		file = mapfile;
+		this.mapFile = mapFile;
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		timer.start();
 		isPaused = false;
-		loadGrid();
+		searcherMap = new HashMap<String,String>();
+		loadConfig(searcherConfig);
+		grid = new Grid(this, gridFile, mapFile, searcherMap, DEFAULT_SPEED, DEFAULT_DIRECTION);
 		
 		//GUI initialization
-		setSize(new Dimension(900, 720));
+		setSize(new Dimension(625, 875));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ControlPanel control = new ControlPanel();
 		add(BorderLayout.SOUTH, control);
+		add(BorderLayout.CENTER, grid);
 	}
 	
-	public static void main(String[] args){
-		AlpineRescue rescue = new AlpineRescue();
-		rescue.setVisible(true);
+	public void loadConfig(String searcherConfig) {
+		try {
+			FileReader reader = new FileReader(searcherConfig);
+			Scanner scan = new Scanner(reader);
+			
+			String line;
+			String[] splitLine;
+			while (scan.hasNextLine()) {
+				line = scan.nextLine();
+				splitLine = line.split(",");
+				searcherMap.put(splitLine[0], splitLine[1]);
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 	
-	public void loadGrid(){
-		grid = new Grid();
-	}
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
-		if(type.equals("dogteam")){
-			searcher = new DogTeam(name, direction, speed, row, column, grid);
-		}
-		if(type.equals("helicopter")){
-			searcher = new Helicopter(name, direction, speed, row, column, grid);
-		}
-		if(type.equals("hiker")){
-			searcher = new Hiker(name, direction, speed, row, column,grid);
-		}
-		searchers.put(name, searcher);
+			if(type.equals("DogTeam")){
+				searcher = new DogTeam(name, direction, speed, row, column, grid);
+			} else if(type.equals("Helicopter")){
+				searcher = new Helicopter(name, direction, speed, row, column, grid);
+			} else if(type.equals("Hiker")){
+				searcher = new Hiker(name, direction, speed, row, column,grid);
+			}
+			searchers.put(name, searcher);
 	}
 	
 	public Searcher getSearcher(String name){
@@ -85,6 +104,18 @@ public class AlpineRescue extends JFrame{
 	
 	public Grid getGrid() {
 		return grid;
+	}
+	
+	public int getDefaultSpeed() {
+		return DEFAULT_SPEED;
+	}
+	
+	public String getDefaultDirection() {
+		return DEFAULT_DIRECTION;
+	}
+	
+	public Map<String,String> getSearcherConfig() {
+		return searcherMap;
 	}
 	
 	public void pause() {
@@ -107,5 +138,11 @@ public class AlpineRescue extends JFrame{
 		}
 		
 	}
+	
+	public static void main(String[] args){
+		AlpineRescue rescue = new AlpineRescue("defaultconfig.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
+		rescue.setVisible(true);
+	}
+	
 
 }

@@ -28,9 +28,9 @@ public class Tests {
 	//Tests that the searchers are initialized correctly
 	@Test 
 	public void testSearchers() {
-		rescue.addSearcher("DogTeam1", "dogteam", "north", 1, 10, 10);
-		rescue.addSearcher("HeliTeam1", "helicopter", "south", 2, 49, 20);
-		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 20, 49);
+		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
+		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 49, 20);
+		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 20, 49);
 		assertEquals("DogTeam1",rescue.getSearcher("DogTeam1").getName());
 		assertEquals("HeliTeam1",rescue.getSearcher("HeliTeam1").getName());
 		assertEquals("HikerTeam1",rescue.getSearcher("HikerTeam1").getName());
@@ -61,9 +61,9 @@ public class Tests {
 
 	@Test 
 	public void testAutoMovement() throws InterruptedException {
-		rescue.addSearcher("DogTeam1", "dogteam", "north", 1, 10, 10);
-		rescue.addSearcher("HeliTeam1", "helicopter", "south", 3, 49, 20);
-		rescue.addSearcher("HikerTeam1", "hiker", "west", 2, 20, 49);
+		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
+		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 3, 49, 20);
+		rescue.addSearcher("HikerTeam1", "Hiker", "west", 2, 20, 49);
 		long time = System.nanoTime();
 		while(System.nanoTime() - time < 700000000);
 		assertEquals(new GridCell(9,10), rescue.getSearcher("DogTeam1").getCell());
@@ -79,14 +79,14 @@ public class Tests {
 	@Test
 	public void testManualMovement() {
 
-		rescue.addSearcher("DogTeam1", "dogteam", "north", 1, 10, 10);
+		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
 
 		rescue.getSearcher("DogTeam1").manualPositionUpdate(11, 12, grid);
 		
-		rescue.addSearcher("HeliTeam1", "helicopter", "south", 2, 20, 00);
+		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 20, 00);
 		rescue.getSearcher("HeliTeam1").manualPositionUpdate(15, 49,grid);
 		
-		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 49, 20);
+		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 49, 20);
 		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 18,grid);
 		
 		
@@ -100,15 +100,15 @@ public class Tests {
 	//tests that the searcher keeps track of the places it has been
 	@Test 
 	public void testPathSave() {
-		rescue.addSearcher("DogTeam1", "dogteam", "north", 1, 10, 10);
+		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
 		rescue.getSearcher("DogTeam1").manualPositionUpdate(11, 12,grid);
 		rescue.getSearcher("DogTeam1").manualPositionUpdate(13, 15,grid);
 
-		rescue.addSearcher("HeliTeam1", "helicopter", "south", 2, 49, 20);
+		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 49, 20);
 		rescue.getSearcher("HeliTeam1").manualPositionUpdate(15, 49,grid);
 		rescue.getSearcher("HeliTeam1").manualPositionUpdate(10, 49,grid);
 
-		rescue.addSearcher("HikerTeam1", "hiker", "west", 5, 20, 49);
+		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 20, 49);
 		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 18, grid);
 		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 16, grid);
 
@@ -127,21 +127,21 @@ public class Tests {
 		assertFalse(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(10,20)));
 	}
 	
-	/*@Test
+	@Test
 	public void testEmptyGrid() {
-		grid = new Grid("defaultconfig.csv");
+		grid = new Grid(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
 		for (GridCell cell : grid.getCellsArray()) assertFalse(cell.isOccupied());
 	}
 	
 	
 	public void testNonEmptyGridConfig() {
-		grid = new Grid("occupiedgrid.csv");
+		grid = new Grid(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
 		for (GridCell cell : grid.getCellsArray()) { 
 			if (cell.getRow() == 20 && cell.getColumn() ==20) assertTrue(cell.isOccupied());
 			else if (cell.getRow() == 1 && cell.getColumn() == 36) assertTrue(cell.isOccupied());
 			else if (cell.getRow() == 14 && cell.getColumn() == 17) assertTrue(cell.isOccupied());
 			else assertFalse(cell.isOccupied());
 		}
-	}*/
+	}
 	
 }

@@ -70,9 +70,13 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		Rectangle rect = new Rectangle(getColumn()*25, getRow()*25, 25, 25);
-		g2.setColor(Color.BLACK);
-		g2.draw(rect);
+		//Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.BLACK);
+		//Rectangle rect = new Rectangle(getColumn()*25, getRow()*25, 25, 25);
+		g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+		if (isOccupied) {
+			g.setColor(Color.YELLOW);
+			g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+		}
 	}
 }

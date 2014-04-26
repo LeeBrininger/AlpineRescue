@@ -4,17 +4,20 @@ import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Grid {
-	private String file;
+import javax.swing.JPanel;
+
+public class Grid extends JPanel{
 	private loadImage image;
+	private String pictureFile;
 	private ArrayList<GridCell> cells;
 	
 	//project should be set up so that these sizes can change
-	public static final int numRows = 50;
-	public static final int numColumns = 50;
+	public static int numRows = 50;
+	public static int numColumns = 50;
 	
 	public Grid() {
 		cells = new ArrayList<GridCell>();
@@ -26,31 +29,57 @@ public class Grid {
 		}
 	}
 	
-	public Grid(String file){
-		this.file = file;
+	public Grid(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, int speed, String direction){
+		cells = new ArrayList<GridCell>();
 		try {
-			FileReader reader = new FileReader(file);
+			FileReader reader = new FileReader(gridFile);
 			Scanner scan = new Scanner(reader);
-			String line = scan.nextLine();
-			String[] splitLine = line.split(",");
-			int rows = Integer.parseInt(splitLine[0]);
-			int columns = Integer.parseInt(splitLine[1]);
+			String line;
+			String[] splitLine;
 			
-			for (int i=0; i<rows; i++) {
-				for (int j=0; j<columns; j++) {
-					
+			line = scan.nextLine();
+			splitLine = line.split(",");
+			
+			numRows = Integer.parseInt(splitLine[0]);
+			numColumns = Integer.parseInt(splitLine[1]);
+			
+			int row = 0;
+			int column = 0;
+			int numSearchers = 1;
+			
+			while(scan.hasNextLine()) {
+				
+				line = scan.nextLine();
+				splitLine = line.split(",");
+				for (String s : splitLine) {
+					GridCell cell = new GridCell(row,column);
+					cells.add(cell);
+					if (searcherConfig.containsKey(s)) {
+						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, speed, row, column);
+						numSearchers++;
+						cell.setOccupied(true);
+					}
+					column++;
+					if (column == numColumns) {
+						row++;
+						column=0;
+					}
 				}
+				
 			}
 		
-			
+			scan.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+		
+		
 	}
+	
 
 	public void printImage(){
-		image.printImage(file);
+		image.printImage(pictureFile);
 	}
 	
 	// get the cell at column, row
@@ -66,9 +95,10 @@ public class Grid {
 	public int getNumColumns() {
 		return Grid.numColumns;
 	}
-	public void printCells(){
-		for(int i = 0; i < 50; i++){
-			cells.get(i).draw(null);//TODO
+	
+	public void paintComponent(Graphics g){
+		for(GridCell i : cells){
+			i.draw(g);//TODO
 		}
 	}
 	
