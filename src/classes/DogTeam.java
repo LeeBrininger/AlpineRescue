@@ -1,15 +1,34 @@
 package classes;
 
+import java.util.Random;
+
 public class DogTeam extends Searcher{
+	
+	Random rand;
 	
 	public DogTeam(){}
 	
 	public DogTeam(String name, String direction, int speed, int row, int column, Grid grid){
 		super(name,direction,speed,row,column,grid);
+		rand = new Random();
 	}
 	
 	public void Symbol(){
 		//TODO
+	}
+	
+	public void erratic() {
+		int directionChange = rand.nextInt(3)-1;
+		int ordinal = getDirection().ordinal() + directionChange;
+		if (ordinal == getDirection().values().length) ordinal = 0;
+		else if (ordinal == -1) ordinal = getDirection().values().length-1;
+		setDirection(getDirection().values()[ordinal]);
+	}
+
+	@Override
+	public void move(Grid grid) {
+		erratic();
+		updatePosition(grid);
 	}
 
 }

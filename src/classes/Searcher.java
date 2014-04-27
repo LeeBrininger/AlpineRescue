@@ -2,7 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 
-public class Searcher {
+public abstract class Searcher {
 	private int speed;
 	private Direction direction;
 	private ArrayList<GridCell> visited;
@@ -55,46 +55,31 @@ public class Searcher {
 		return direction;
 	}
 	
-	public void move(Grid grid){
+	public abstract void move(Grid grid);
+	
+	public boolean isValidCell(int row,int column, Grid grid) {
+		if (row < 0 || row >= grid.getNumRows()) return false;
+		else if (column < 0 || column >= grid.getNumColumns()) return false;
+		GridCell cell = grid.getCellAt(row, column);
+		if (cell.isOccupied() || cell.isSearched()) return false;
+		else return true;
+	}
+	
+	public void updatePosition(Grid grid) {
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
 		int column = cell.getColumn();
-		switch (direction) {
-		case NORTH:
-			row -=speed;
-			break;
-		case SOUTH:
-			row += speed;
-			break;
-		case EAST:
-			column+=speed;
-			break;
-		case WEST:
-			column-=speed;
-			break;
-		case NORTHEAST:
-			column+=speed;
-			row-=speed;
-			break;
-		case NORTHWEST:
-			row-=speed;
-			column-=speed;
-			break;
-		case SOUTHWEST:
-			column-=speed;
-			row+=speed;
-			break;
-		case SOUTHEAST:
-			row+=speed;
-			column+=speed;
-			break;
+		row += direction.getVertical()*speed;
+		column += direction.getHorizontal()*speed;
+		
+		if (isValidCell(row,column,grid)) {
+			cell.setSearched();
+			cell.setOccupied(false);
+			cell = grid.getCellAt(row,column);
+			cell.setOccupied(true);
 		}
-
-		cell.setSearched();
-		cell.setOccupied(false);
-		cell = grid.getCellAt(row,column);
-		cell.setOccupied(true);
 	}
+	
 	public void manualPositionUpdate(int row, int column, Grid grid){
 		cell.setOccupied(false);
 
@@ -113,12 +98,21 @@ public class Searcher {
 	public GridCell getCell(){
 		return cell;
 	}
+	
 	public ArrayList<GridCell> getVisited(){
 		return visited;
 	}
 	
 	public Direction getDirection() {
 		return direction;
+	}
+	
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
+	public int getSpeed() {
+		return speed;
 	}
 	
 	public String getName() {

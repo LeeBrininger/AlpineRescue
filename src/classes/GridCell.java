@@ -44,6 +44,11 @@ public class GridCell{
 	public boolean isOccupied() {
 		return isOccupied;
 	}
+	
+	public boolean isSearched() {
+		return isSearched;
+	}
+	
 	//can be used to set isSearched to either true or false
 	public void setSearched(boolean setValue) {
 		isSearched = setValue;

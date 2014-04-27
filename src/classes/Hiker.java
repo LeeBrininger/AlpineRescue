@@ -11,4 +11,9 @@ public class Hiker extends Searcher{
 	public void Symbol(){
 		
 	}
+
+	@Override
+	public void move(Grid grid) {
+		updatePosition(grid);
+	}
 }

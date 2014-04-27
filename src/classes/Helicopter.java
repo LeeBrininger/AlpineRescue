@@ -13,4 +13,10 @@ public class Helicopter extends Searcher{
 		
 	}
 
+
+	@Override
+	public void move(Grid grid) {
+		updatePosition(grid);
+	}
+
 }
