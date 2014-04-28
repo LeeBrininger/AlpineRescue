@@ -35,4 +35,5 @@ public class Hiker extends Searcher{
 		g.setColor(Color.YELLOW);
 		g.fillRect(rectX, rectY, width, height);		
 	}
+
 }

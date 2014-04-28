@@ -76,20 +76,22 @@ public abstract class Searcher {
 		
 		if (isValidCell(row,column,grid)) {
 			cell.setSearched();
+			cell.setSearcher(null);
 			cell.setOccupied(false);
 			cell = grid.getCellAt(row,column);
 			cell.setOccupied(true);
+			cell.setSearcher(this);
 		}
-
 	}
 	
 	public void manualPositionUpdate(int row, int column, Grid grid){
 		cell.setOccupied(false);
-
+		cell.setSearcher(null);
 		cell.setSearched();
 		visited.add(new GridCell(cell));
 		cell = grid.getCellAt(row,column);
 		cell.setOccupied(true);
+		cell.setSearcher(this);
 	}
 	public void changeDirection(String newDirection){
 		visited.add(new GridCell(cell));

@@ -45,13 +45,25 @@ public class ControlPanel extends JPanel{
 		
 	}
 	
+
+	public void setSelectedSearcherName(String inputText) {
+		selected.setName(inputText);
+	}
+	
+	public void setSelectedSearcherSpeed(String inputText) {
+		selected.setSpeed(inputText);
+	}
+	
+	public void setSelectedSearcherLocation(String inputText) {
+		selected.setLocation(inputText);
+	}
+	
 	class ButtonListener implements ActionListener {
 		private AlpineRescue rescue;
 		
 		public ButtonListener(AlpineRescue rescue) {
 			this.rescue = rescue;
 		}
-
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == pauseButton) {

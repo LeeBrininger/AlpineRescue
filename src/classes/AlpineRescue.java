@@ -1,6 +1,7 @@
 package classes;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ public class AlpineRescue extends JFrame{
 	private boolean isPaused;
 	private ControlPanel control;
 	private Searcher selectedSearcher; //is currently set to null if no searcher selected
+	private GridCell selectedCell;
 	
 	public AlpineRescue(){
 		searchers = new HashMap<String, Searcher>();
@@ -64,6 +66,9 @@ public class AlpineRescue extends JFrame{
 		add(BorderLayout.SOUTH, control);
 		add(BorderLayout.CENTER, grid);
 		grid.addMouseListener(new AlpineListener());
+		//so that selectedCell is not null
+		selectedCell = grid.getCellAt(0, 0);
+
 	}
 	
 	public void loadConfig(String searcherConfig) {
@@ -166,7 +171,22 @@ public class AlpineRescue extends JFrame{
 		
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			selectedCell.setSelected(false); //previous selected cell is not longer selected
+			
+			selectedCell = grid.getCellAt(arg0.getY()/GridCell.getCellWidth(), arg0.getX()/GridCell.getCellWidth());
+			selectedCell.setSelected(true);
+			
+			if (selectedCell.isOccupied()) {		
+				selectedSearcher = selectedCell.getSearcher();
+				control.setSelectedSearcherName(selectedSearcher.getName());
+				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
+				control.setSelectedSearcherLocation(selectedCell.toString());
+			} else {
+				selectedSearcher = null;
+				control.setSelectedSearcherName("(none selected)");
+				control.setSelectedSearcherSpeed("");
+				control.setSelectedSearcherLocation(selectedCell.toString());
+			}
 		}
 
 		@Override

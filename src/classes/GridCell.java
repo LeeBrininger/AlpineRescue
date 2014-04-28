@@ -11,6 +11,8 @@ public class GridCell{
 	private boolean isSearched;
 	private boolean isOccupied;
 	private static final int CELL_WIDTH = 12;
+	private boolean isSelected;
+	private Searcher searcher;
 	
 	public GridCell () {
 		isSearched = false;
@@ -39,6 +41,18 @@ public class GridCell{
 		return column;
 	}
 	
+	public void setSelected(boolean selected) {
+		isSelected = selected;
+	}
+	
+	public void setSearcher(Searcher searcher) {
+		this.searcher = searcher;
+	}
+	
+	public boolean isSelected() {
+		return isSelected;
+	}
+	
 	public void setOccupied(boolean occupied) {
 		isOccupied = occupied;
 	}
@@ -49,6 +63,10 @@ public class GridCell{
 	
 	public boolean isSearched() {
 		return isSearched;
+	}
+	
+	public Searcher getSearcher() {
+		return searcher;
 	}
 	
 	//can be used to set isSearched to either true or false
@@ -79,7 +97,14 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
-	
+		
+		//clear previous borders shown from being selected
+		g.setColor(Color.WHITE);
+		g.drawRect(getColumn()*CELL_WIDTH + 1, getRow()*CELL_WIDTH + 1,
+				CELL_WIDTH - 2, CELL_WIDTH - 2);
+		g.drawRect(getColumn()*CELL_WIDTH + 2, getRow()*CELL_WIDTH + 2, 
+				CELL_WIDTH - 4, CELL_WIDTH - 4);
+		
 		if (isOccupied) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
@@ -87,11 +112,20 @@ public class GridCell{
 		} else if (isSearched) {
 			g.setColor(Color.RED);
 			g.fillRect(getColumn()*CELL_WIDTH,getRow()*CELL_WIDTH,CELL_WIDTH,CELL_WIDTH);
+	
 		}
 		
-			g.setColor(Color.BLACK);
-			g.drawRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
-		
+		//draw cell border
+		g.setColor(Color.BLACK);
+		g.drawRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH,
+				CELL_WIDTH, CELL_WIDTH);
+		if (isSelected) {
+			g.setColor(Color.GREEN);
+			g.drawRect(getColumn()*CELL_WIDTH + 1, getRow()*CELL_WIDTH + 1,
+					CELL_WIDTH - 2, CELL_WIDTH - 2);
+			g.drawRect(getColumn()*CELL_WIDTH + 2, getRow()*CELL_WIDTH + 2, 
+					CELL_WIDTH - 4, CELL_WIDTH - 4);
+		}
 		
 	}
 }
