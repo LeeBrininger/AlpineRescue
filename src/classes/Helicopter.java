@@ -1,5 +1,8 @@
 package classes;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Helicopter extends Searcher{
 	
 	public Helicopter(){}
@@ -17,6 +20,14 @@ public class Helicopter extends Searcher{
 	@Override
 	public void move(Grid grid) {
 		updatePosition(grid);
+	}
+
+
+	@Override
+	public void draw(int rectX, int rectY, int width, int height, Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(rectX, rectY, width, height);
+		
 	}
 
 }

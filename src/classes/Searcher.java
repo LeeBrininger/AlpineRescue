@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public abstract class Searcher {
@@ -71,6 +72,7 @@ public abstract class Searcher {
 	}
 	
 	public void updatePosition(Grid grid) {
+		cell.removeSearcher(this);
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
 		int column = cell.getColumn();
@@ -86,8 +88,9 @@ public abstract class Searcher {
 		
 		//turn to avoid going off the grid
 		if (cellIsOffGrid(row, column, grid)) {
-			turnRight90Degrees();
+			//turnRight90Degrees();
 		}
+		cell.addSearcher(this);
 	}
 	
 	public void manualPositionUpdate(int row, int column, Grid grid){
@@ -136,6 +139,8 @@ public abstract class Searcher {
 	
 	public void Symbol(){
 	}
+	
+	public abstract void draw(int rectX, int rectY, int width, int height, Graphics g);
 	
 	public GridCell getCell(){
 		return cell;

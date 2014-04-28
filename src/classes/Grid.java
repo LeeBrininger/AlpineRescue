@@ -74,8 +74,6 @@ public class Grid extends JPanel{
 		image.printImage(pictureFile);
 	}
 	
-	// get the cell at column, row
-	//defined as column first because player x coordinate is column
 	public GridCell getCellAt(int row, int column) {
 		return cells.get(row*this.getNumColumns() + column);
 	}
@@ -89,6 +87,7 @@ public class Grid extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
+		super.repaint();
 		for(GridCell i : cells){
 			i.draw(g);//TODO
 		}
