@@ -101,27 +101,34 @@ public class GridCell{
 		
 		//clear previous borders shown from being selected
 		g.setColor(Color.WHITE);
-		g.drawRect(getColumn()*12 + 1, getRow()*12 + 1, 10, 10);
-		g.drawRect(getColumn()*12 + 2, getRow()*12 + 2, 8, 8);
+		g.drawRect(getColumn()*Grid.cellWidth + 1, getRow()*Grid.cellHeight + 1,
+				Grid.cellWidth - 2, Grid.cellHeight - 2);
+		g.drawRect(getColumn()*Grid.cellWidth + 2, getRow()*Grid.cellHeight + 2, 
+				Grid.cellWidth - 4, Grid.cellHeight - 4);
 		
 		if (isOccupied) {
 			for (Searcher s : searchers) {
-				s.draw(getColumn()*12, getRow()*12, 12 ,12, g);
+				s.draw(getColumn()*Grid.cellWidth, getRow()*Grid.cellHeight, 
+						Grid.cellWidth ,Grid.cellHeight, g);
 			}
 			//g.setColor(Color.YELLOW);
 			//g.fillRect(getColumn()*12, getRow()*12, 12, 12);
 		} else if (isSearched) {
 			g.setColor(Color.RED);
-			g.fillRect(getColumn()*12,getRow()*12,12,12);
+			g.fillRect(getColumn()*Grid.cellWidth,getRow()*Grid.cellHeight,
+					Grid.cellWidth,Grid.cellHeight);
 		}
 		
 		//draw cell boarder
 		g.setColor(Color.BLACK);
-		g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+		g.drawRect(getColumn()*Grid.cellWidth, getRow()*Grid.cellHeight,
+				Grid.cellWidth, Grid.cellHeight);
 		if (isSelected) {
 			g.setColor(Color.GREEN);
-			g.drawRect(getColumn()*12 + 1, getRow()*12 + 1, 10, 10);
-			g.drawRect(getColumn()*12 + 2, getRow()*12 + 2, 8, 8);
+			g.drawRect(getColumn()*Grid.cellWidth + 1, getRow()*Grid.cellHeight + 1,
+					Grid.cellWidth - 2, Grid.cellHeight - 2);
+			g.drawRect(getColumn()*Grid.cellWidth + 2, getRow()*Grid.cellHeight + 2, 
+					Grid.cellWidth - 4, Grid.cellHeight - 4);
 		}
 		
 	}

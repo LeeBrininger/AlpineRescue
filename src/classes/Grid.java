@@ -19,6 +19,9 @@ public class Grid extends JPanel{
 	public static int numRows = 50;
 	public static int numColumns = 50;
 	
+	public static int cellWidth = 12;
+	public static int cellHeight = 12;
+	
 	public Grid() {
 		cells = new ArrayList<GridCell>();
 		

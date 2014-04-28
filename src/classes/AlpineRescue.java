@@ -161,7 +161,7 @@ public class AlpineRescue extends JFrame{
 		public void mouseClicked(MouseEvent arg0) {
 			selectedCell.setSelected(false); //previous selected cell is not longer selected
 			
-			selectedCell = grid.getCellAt(arg0.getY()/12, arg0.getX()/12);
+			selectedCell = grid.getCellAt(arg0.getY()/Grid.cellHeight, arg0.getX()/grid.cellWidth);
 			selectedCell.setSelected(true);
 			
 			if (selectedCell.isOccupied()) {		
