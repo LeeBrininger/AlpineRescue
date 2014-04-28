@@ -32,6 +32,7 @@ public class AlpineRescue extends JFrame{
 	private Map<String, String> searcherMap;
 	private boolean isPaused;
 	private ControlPanel control;
+	private Searcher selectedSearcher; //is currently set to null if no searcher selected
 	
 	public AlpineRescue(){
 		searchers = new HashMap<String, Searcher>();
@@ -154,19 +155,20 @@ public class AlpineRescue extends JFrame{
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			
-			
-			if (grid.getCellAt(arg0.getY()/12, arg0.getX()/12).isOccupied()) {		
-				System.out.println(grid.getCellAt(arg0.getY()/12, arg0.getX()/12));
-				System.out.println(grid.getCellAt(arg0.getY()/12, arg0.getX()/12).getSearchers());
+			GridCell cellClicked = grid.getCellAt(arg0.getY()/12, arg0.getX()/12);
+			if (cellClicked.isOccupied()) {		
+				System.out.println(cellClicked);
+				System.out.println(cellClicked.getSearchers());
 				//if there is more than on searcher in a cell, only show info for first searcher
-				Searcher s = grid.getCellAt(arg0.getY()/12, arg0.getX()/12).getSearchers().get(0);
-				control.setSelectedSearcherName(s.getName());
-				control.setSelectedSearcherSpeed(Integer.toString(s.getSpeed()));
-				control.setSelectedSearcherLocation(grid.getCellAt(arg0.getY()/12, arg0.getX()/12).toString());
+				selectedSearcher = cellClicked.getSearchers().get(0);
+				control.setSelectedSearcherName(selectedSearcher.getName());
+				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
+				control.setSelectedSearcherLocation(cellClicked.toString());
 			} else {
-				control.setSelectedSearcherName("");
+				selectedSearcher = null;
+				control.setSelectedSearcherName("(none selected)");
 				control.setSelectedSearcherSpeed("");
-				control.setSelectedSearcherLocation("");
+				control.setSelectedSearcherLocation(cellClicked.toString());
 			}
 		}
 
