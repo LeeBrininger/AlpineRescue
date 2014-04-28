@@ -18,6 +18,7 @@ public abstract class Searcher {
 		visited = new ArrayList<GridCell>();
 		cell = grid.getCellAt(row,column);
 		cell.setOccupied(true);
+		cell.setSearcher(this);
 		this.speed = speed;
 		this.direction = decodeDirection(direction);
 		grid.repaint();
@@ -75,12 +76,7 @@ public abstract class Searcher {
 		column += direction.getHorizontal();
 		
 		if (isValidCell(row,column,grid)) {
-			cell.setSearched();
-			cell.setSearcher(null);
-			cell.setOccupied(false);
-			cell = grid.getCellAt(row,column);
-			cell.setOccupied(true);
-			cell.setSearcher(this);
+			manualPositionUpdate(row,column,grid);
 		}
 	}
 	

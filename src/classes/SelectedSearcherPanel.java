@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -17,11 +18,12 @@ public class SelectedSearcherPanel extends JPanel{
 		name = new TextDisplay("Name");
 		speed = new TextDisplay("Speed");
 		location = new TextDisplay("Location");
-		setLayout(new GridLayout(4,1));
+		setLayout(new GridLayout(2,2));
 		add(selectedSearcher);
 		add(name);
 		add(speed);
 		add(location);
+		speed.setSize(100,20);
 	}
 	
 	public void setName(String text) {

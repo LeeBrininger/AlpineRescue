@@ -54,13 +54,6 @@ public class AlpineRescue extends JFrame{
 		loadConfig(searcherConfig);
 		grid = new Grid();
 		grid.loadConfig(this, gridFile, mapFile, searcherMap, "North");
-		
-		//GUI initialization
-		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
-		int height = grid.getNumRows()*GridCell.getCellWidth() + 300;
-		setSize(new Dimension(width, height));
-		setTitle("Alpine Rescue");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		control = new ControlPanel(this);
 		add(BorderLayout.SOUTH, control);
@@ -68,6 +61,13 @@ public class AlpineRescue extends JFrame{
 		grid.addMouseListener(new AlpineListener());
 		//so that selectedCell is not null
 		selectedCell = grid.getCellAt(0, 0);
+		
+		//GUI initialization
+		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
+		int height = grid.getNumRows()*GridCell.getCellWidth() + 250;
+		setSize(new Dimension(width, height));
+		setTitle("Alpine Rescue");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 	
@@ -178,9 +178,11 @@ public class AlpineRescue extends JFrame{
 			
 			if (selectedCell.isOccupied()) {		
 				selectedSearcher = selectedCell.getSearcher();
-				control.setSelectedSearcherName(selectedSearcher.getName());
-				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
-				control.setSelectedSearcherLocation(selectedCell.toString());
+				if (selectedSearcher!= null) {
+					control.setSelectedSearcherName(selectedSearcher.getName());
+					control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
+					control.setSelectedSearcherLocation(selectedCell.toString());
+				}
 			} else {
 				selectedSearcher = null;
 				control.setSelectedSearcherName("(none selected)");

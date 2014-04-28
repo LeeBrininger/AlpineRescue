@@ -1,6 +1,8 @@
 package classes;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,8 +21,9 @@ public class ControlPanel extends JPanel{
 	private SelectedSearcherPanel selected;
 
 	public ControlPanel(AlpineRescue rescue){
-		setLayout(new GridLayout(2,3));
-		setPreferredSize(new Dimension(200,200));
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		setPreferredSize(new Dimension(180,180));
 		searchers = new JComboBox<String>();
 		addSearcherButton = new JButton("Add Searcher");
 		changeButton = new JButton("Change Attributes");
@@ -34,14 +37,24 @@ public class ControlPanel extends JPanel{
 		searchers.addItem("Dog Team");
 		searchers.addItem("Hikers");
 		
+		gbc.gridx=0;
+		gbc.gridy=0;
+		gbc.weightx = .2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		add(addSearcherButton, gbc);
+		gbc.gridx=1;
+		add(searchers, gbc);
+		gbc.gridx=2;
+		gbc.weightx = .40;
+		add(selected,gbc);
 
-		add (pauseButton);
-
-		add(new JPanel());
-		add(selected);
-		add(searchers);
-		add(addSearcherButton);
-		add(changeButton);
+		gbc.weightx = .2;
+		gbc.gridy=1;
+		gbc.gridx=0;
+		add (pauseButton,gbc);
+		gbc.gridy=1;
+		gbc.gridx=2;
+		add(changeButton,gbc);
 		
 	}
 	
@@ -69,7 +82,7 @@ public class ControlPanel extends JPanel{
 			if (e.getSource() == pauseButton) {
 				rescue.pause();
 				if (!rescue.isPaused()) pauseButton.setText("Pause");
-				else pauseButton.setName("Text");
+				else pauseButton.setText("Start");
 			} else
 				System.out.println("Button pressed");
 		}
