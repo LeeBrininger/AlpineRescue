@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
@@ -57,6 +60,7 @@ public class AlpineRescue extends JFrame{
 		ControlPanel control = new ControlPanel();
 		add(BorderLayout.SOUTH, control);
 		add(BorderLayout.CENTER, grid);
+		grid.addMouseListener(new AlpineListener());
 	}
 	
 	public void loadConfig(String searcherConfig) {
@@ -147,6 +151,39 @@ public class AlpineRescue extends JFrame{
 		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
 		rescue.pause();
 		rescue.setVisible(true);
+	}
+	
+	//mouse listener
+	private class AlpineListener implements MouseListener {
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			System.out.println(grid.getCellAt(arg0.getX()/12, arg0.getY()/12));
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 
