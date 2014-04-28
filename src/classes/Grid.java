@@ -87,7 +87,7 @@ public class Grid extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
-		super.repaint();
+		super.paintComponent(g);
 		for(GridCell i : cells){
 			i.draw(g);//TODO
 		}
