@@ -87,7 +87,6 @@ public class GridCell{
 	public void draw(Graphics g) {
 	
 		if (isOccupied) {
-			System.out.println(searchers);
 			for (Searcher s : searchers) {
 				s.draw(getColumn()*12, getRow()*12, 12 ,12, g);
 			}

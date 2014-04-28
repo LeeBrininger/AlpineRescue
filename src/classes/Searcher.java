@@ -88,7 +88,7 @@ public abstract class Searcher {
 		
 		//turn to avoid going off the grid
 		if (cellIsOffGrid(row, column, grid)) {
-			//turnRight90Degrees();
+			turnRight90Degrees();
 		}
 		cell.addSearcher(this);
 	}
