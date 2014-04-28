@@ -127,6 +127,8 @@ public abstract class Searcher {
 		return name;
 	}
 	
+	public abstract String getType();
+	
 	public boolean canFlyOver() {
 		return canFlyOver;
 	}

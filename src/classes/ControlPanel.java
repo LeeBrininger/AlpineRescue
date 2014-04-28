@@ -78,106 +78,107 @@ public class ControlPanel extends JPanel{
 	
 	class ButtonListener implements ActionListener {
 		private AlpineRescue rescue;
-		
+
 		public ButtonListener(AlpineRescue rescue) {
 			this.rescue = rescue;
 		}
-		public void actionPerformed(ActionEvent e)
-		{
+
+		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == pauseButton) {
 				rescue.pause();
-				if (!rescue.isPaused()) pauseButton.setText("Pause");
-				else pauseButton.setText("Start");
-			} else if (e.getSource() == addSearcherButton) {
-				JTextField name = new JTextField();
-				JTextField direction = new JTextField();
-				JTextField speedField = new JTextField();
-				JTextField rowField = new JTextField();
-				JTextField columnField = new JTextField();
-				
-				Object[] inputs = {
-						"Type: ", getSelectedType(),
-						"Name: ", name,
-						"Direction:", direction,
-						"Speed: ", speedField,
-						"Row: ", rowField,
-						"Column: ", columnField
-				};
-
-				int choice = JOptionPane.showConfirmDialog(rescue, inputs, "Add Searcher", JOptionPane.OK_CANCEL_OPTION);
-				
-				if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) return;
-				
-				boolean check = checkFields(name, direction ,speedField, rowField, columnField);
-				
-				if (check) {
-					int row = Integer.parseInt(rowField.getText());
-					int column = Integer.parseInt(columnField.getText());
-					int speed = Integer.parseInt(speedField.getText());
-					if (row < 0 || row >= rescue.getGrid().getNumRows() || column < 0 || column >= rescue.getGrid().getNumColumns()) {
-						JOptionPane.showMessageDialog(rescue, "Row/Column out of bounds!", "ERROR", JOptionPane.ERROR_MESSAGE);
-						return;
-					} 
-					String type = getSelectedType().replaceAll("\\s+","");
-					rescue.addSearcher(name.getText(), type, direction.getText(), speed, row, column);
-				}
-				
+				if (!rescue.isPaused())
+					pauseButton.setText("Pause");
+				else
+					pauseButton.setText("Start");
 			} else {
-				if (rescue.getSelectedSearcher() == null) { 
-					JOptionPane.showMessageDialog(rescue, "There's no searcher selected!" , "ERROR", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
 				JTextField name = new JTextField();
-				name.setText(rescue.getSelectedSearcher().getName());
-				name.setEditable(false);
 				JTextField direction = new JTextField();
 				JTextField speedField = new JTextField();
 				JTextField rowField = new JTextField();
 				JTextField columnField = new JTextField();
+				Searcher selectedSearcher = rescue.getSelectedSearcher();
+				String type;
 				
-				Object[] inputs = {
-						"Name: ", name,
-						"Direction: ", direction,
-						"Speed: ", speedField,
-						"Row: ", rowField,
-						"Column: ", columnField
-				};
-			
-				int choice = JOptionPane.showConfirmDialog(rescue, inputs, "Change Attributes", JOptionPane.OK_CANCEL_OPTION);
-				
-				if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) return;
-				
-				boolean check = checkFields(name, direction, speedField, rowField, columnField);
-				
+				if (e.getSource() == addSearcherButton) {
+					type = getSelectedType();
+				} else {
+					type = rescue.getSelectedSearcher().getType();
+					name.setEditable(false);
+					name.setText(selectedSearcher.getName());
+				}
+
+				Object[] inputs = { "Type: ", type, "Name: ", name,
+						"Direction:", direction, "Speed: ", speedField,
+						"Row: ", rowField, "Column: ", columnField };
+
+				int choice;
+
+				if (e.getSource() == addSearcherButton) {
+					choice = JOptionPane.showConfirmDialog(rescue, inputs,
+							"Add Searcher", JOptionPane.OK_CANCEL_OPTION);
+				} else {
+					choice = JOptionPane.showConfirmDialog(rescue, inputs,
+							"Change Attributes", JOptionPane.OK_CANCEL_OPTION);
+				}
+
+				if (choice == JOptionPane.CANCEL_OPTION
+						|| choice == JOptionPane.CLOSED_OPTION)
+					return;
+
+				boolean check = checkFields(name, direction, speedField,
+						rowField, columnField);
 				if (check) {
 					int row = Integer.parseInt(rowField.getText());
 					int column = Integer.parseInt(columnField.getText());
 					int speed = Integer.parseInt(speedField.getText());
-					if (row < 0 || row >= rescue.getGrid().getNumRows() || column < 0 || column >= rescue.getGrid().getNumColumns()) {
-						JOptionPane.showMessageDialog(rescue, "Row/Column out of bounds!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					if (row < 0 || row >= rescue.getGrid().getNumRows()
+							|| column < 0
+							|| column >= rescue.getGrid().getNumColumns()) {
+						JOptionPane.showMessageDialog(rescue,
+								"Row/Column out of bounds!", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					rescue.getSelectedSearcher().manualPositionUpdate(row, column, rescue.getGrid());
-					rescue.getSelectedSearcher().setSpeed(speed);
-					rescue.getSelectedSearcher().setDirection(Searcher.decodeDirection(direction.getText()));
+					if (e.getSource() == addSearcherButton) {
+						type = getSelectedType().replaceAll("\\s+", "");
+						rescue.addSearcher(name.getText(), type,
+								direction.getText(), speed, row, column);
+					} else {
+						selectedSearcher.manualPositionUpdate(row, column,
+								rescue.getGrid());
+						selectedSearcher.setSpeed(speed);
+						selectedSearcher.setDirection(Searcher
+								.decodeDirection(direction.getText()));
+					}
 				}
+
 			}
 		}
-		
-		public boolean checkFields(JTextField name, JTextField direction, JTextField speed, JTextField rowField, JTextField columnField) {
-			if (name.getText().equals("") || direction.getText().equals("") || speed.getText().equals("") || rowField.getText().equals("") || columnField.getText().equals("")) {
-				JOptionPane.showMessageDialog(rescue, "All fields need to be filled!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+		public boolean checkFields(JTextField name, JTextField direction,
+				JTextField speed, JTextField rowField, JTextField columnField) {
+			if (name.getText().equals("") || direction.getText().equals("")
+					|| speed.getText().equals("")
+					|| rowField.getText().equals("")
+					|| columnField.getText().equals("")) {
+				JOptionPane.showMessageDialog(rescue,
+						"All fields need to be filled!", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 				return false;
 			} else if (Searcher.decodeDirection(direction.getText()) == null) {
-				JOptionPane.showMessageDialog(rescue, "That is not a valid direction!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(rescue,
+						"That is not a valid direction!", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 				return false;
 			} else {
 				try {
 					Integer.parseInt(rowField.getText());
 					Integer.parseInt(columnField.getText());
 					Integer.parseInt(speed.getText());
-				} catch(NumberFormatException n) {
-					JOptionPane.showMessageDialog(rescue, "Row, column, and speed need to be integers!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException n) {
+					JOptionPane.showMessageDialog(rescue,
+							"Row, column, and speed need to be integers!",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 					return false;
 				}
 			}

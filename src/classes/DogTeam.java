@@ -49,4 +49,9 @@ public class DogTeam extends Searcher{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Dog Team";
+	}
+
 }

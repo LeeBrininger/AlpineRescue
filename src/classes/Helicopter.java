@@ -40,4 +40,9 @@ public class Helicopter extends Searcher{
 		
 	}
 
+	@Override
+	public String getType() {
+		return "Helicopter";
+	}
+
 }

@@ -36,4 +36,9 @@ public class Hiker extends Searcher{
 		g.fillRect(rectX, rectY, width, height);		
 	}
 
+	@Override
+	public String getType() {
+		return "Hiker";
+	}
+
 }
