@@ -1,5 +1,8 @@
 package classes;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Hiker extends Searcher{
 	
 	private static final int DEFAULT_SPEED = 1;
@@ -25,5 +28,11 @@ public class Hiker extends Searcher{
 	@Override
 	public void move(Grid grid) {
 		for (int i =0; i < getSpeed(); i++) updatePosition(grid);
+	}
+
+	@Override
+	public void draw(int rectX, int rectY, int width, int height, Graphics g) {
+		g.setColor(Color.YELLOW);
+		g.fillRect(rectX, rectY, width, height);		
 	}
 }

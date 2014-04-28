@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
@@ -26,6 +29,8 @@ public class AlpineRescue extends JFrame{
 	private Map<String, Searcher> searchers;
 	private Map<String, String> searcherMap;
 	private boolean isPaused;
+	private ControlPanel control;
+	private Searcher selectedSearcher; //is currently set to null if no searcher selected
 	
 	public AlpineRescue(){
 		searchers = new HashMap<String, Searcher>();
@@ -50,14 +55,15 @@ public class AlpineRescue extends JFrame{
 		
 		//GUI initialization
 		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
-		int height = grid.getNumRows()*GridCell.getCellWidth() + 275;
+		int height = grid.getNumRows()*GridCell.getCellWidth() + 300;
 		setSize(new Dimension(width, height));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ControlPanel control = new ControlPanel(this);
-		
-		add(BorderLayout.CENTER, grid);
+
+		control = new ControlPanel(this);
 		add(BorderLayout.SOUTH, control);
+		add(BorderLayout.CENTER, grid);
+		grid.addMouseListener(new AlpineListener());
 	}
 	
 	public void loadConfig(String searcherConfig) {
@@ -155,10 +161,45 @@ public class AlpineRescue extends JFrame{
 		
 	}
 	
+	//mouse listener
+	private class AlpineListener implements MouseListener {
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
+	
 	public static void main(String[] args){
 		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
 		rescue.setVisible(true);
 	}
 	
+
 
 }

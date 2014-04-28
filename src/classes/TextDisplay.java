@@ -20,6 +20,10 @@ public class TextDisplay extends JPanel{
 		setBorder(border);	
 
 	}
+	
+	public void setText(String textInput) {
+		text.setText(textInput);
+	}
 
 	public void setText(String input, String type){
 		text.setText(input);

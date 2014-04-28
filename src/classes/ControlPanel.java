@@ -20,7 +20,7 @@ public class ControlPanel extends JPanel{
 
 	public ControlPanel(AlpineRescue rescue){
 		setLayout(new GridLayout(2,3));
-		setPreferredSize(new Dimension(375,250));
+		setPreferredSize(new Dimension(200,200));
 		searchers = new JComboBox<String>();
 		addSearcherButton = new JButton("Add Searcher");
 		changeButton = new JButton("Change Attributes");
@@ -51,7 +51,7 @@ public class ControlPanel extends JPanel{
 		public ButtonListener(AlpineRescue rescue) {
 			this.rescue = rescue;
 		}
-		
+
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == pauseButton) {

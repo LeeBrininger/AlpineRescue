@@ -1,5 +1,7 @@
 package classes;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 
 public class DogTeam extends Searcher{
@@ -38,6 +40,13 @@ public class DogTeam extends Searcher{
 	public void move(Grid grid) {
 		erratic();
 		for (int i =0; i < getSpeed(); i++) updatePosition(grid);
+	}
+
+	@Override
+	public void draw(int rectX, int rectY, int width, int height, Graphics g) {
+		g.setColor(Color.CYAN);
+		g.fillRect(rectX, rectY, width, height);
+		
 	}
 
 }

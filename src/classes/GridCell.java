@@ -2,6 +2,7 @@ package classes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 	
 	
 public class GridCell{
@@ -67,7 +68,7 @@ public class GridCell{
 		if (this.row == newCell.row && this.column == newCell.column) return true;
 		else return false;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "(" + row + ", " + column +")";
@@ -82,6 +83,7 @@ public class GridCell{
 		if (isOccupied) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
+
 		} else if (isSearched) {
 			g.setColor(Color.RED);
 			g.fillRect(getColumn()*CELL_WIDTH,getRow()*CELL_WIDTH,CELL_WIDTH,CELL_WIDTH);
