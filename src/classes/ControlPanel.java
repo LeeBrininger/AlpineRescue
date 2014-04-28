@@ -118,7 +118,8 @@ public class ControlPanel extends JPanel{
 						JOptionPane.showMessageDialog(rescue, "Row/Column out of bounds!", "ERROR", JOptionPane.ERROR_MESSAGE);
 						return;
 					} 
-					rescue.addSearcher(name.getText(), getSelectedType(), direction.getText(), speed, row, column);
+					String type = getSelectedType().replaceAll("\\s+","");
+					rescue.addSearcher(name.getText(), type, direction.getText(), speed, row, column);
 				}
 				
 			} else {
