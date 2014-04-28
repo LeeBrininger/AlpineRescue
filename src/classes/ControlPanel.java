@@ -56,7 +56,6 @@ public class ControlPanel extends JPanel{
 		gbc.gridy=1;
 		gbc.gridx=2;
 		add(changeButton,gbc);
-		
 	}
 	
 
@@ -98,6 +97,11 @@ public class ControlPanel extends JPanel{
 				JTextField columnField = new JTextField();
 				Searcher selectedSearcher = rescue.getSelectedSearcher();
 				String type;
+				
+				if (selectedSearcher == null) {
+					JOptionPane.showMessageDialog(rescue, "There is no searcher selected!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				
 				if (e.getSource() == addSearcherButton) {
 					type = getSelectedType();
