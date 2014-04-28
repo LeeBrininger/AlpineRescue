@@ -58,11 +58,16 @@ public abstract class Searcher {
 	public abstract void move(Grid grid);
 	
 	public boolean isValidCell(int row,int column, Grid grid) {
-		if (row < 0 || row >= grid.getNumRows()) return false;
-		else if (column < 0 || column >= grid.getNumColumns()) return false;
+		if (cellIsOffGrid(row, column, grid)) return false;
 		GridCell cell = grid.getCellAt(row, column);
 		if (cell.isOccupied() || cell.isSearched()) return false;
 		else return true;
+	}
+	
+	private boolean cellIsOffGrid(int row, int column, Grid grid) {
+		if (row < 0 || row >= grid.getNumRows()) return true;
+		else if (column < 0 || column >= grid.getNumColumns()) return true;
+		else return false;
 	}
 	
 	public void updatePosition(Grid grid) {
@@ -78,6 +83,11 @@ public abstract class Searcher {
 			cell = grid.getCellAt(row,column);
 			cell.setOccupied(true);
 		}
+		
+		//turn to avoid going off the grid
+		if (cellIsOffGrid(row, column, grid)) {
+			turnRight90Degrees();
+		}
 	}
 	
 	public void manualPositionUpdate(int row, int column, Grid grid){
@@ -92,6 +102,38 @@ public abstract class Searcher {
 		visited.add(new GridCell(cell));
 		direction = decodeDirection(newDirection);
 	}
+	
+	public void turnRight90Degrees() {
+		switch(direction) {
+		case NORTH:
+			direction = Direction.EAST;
+			break;
+		case SOUTH:
+			direction = Direction.WEST;
+			break;
+		case WEST:
+			direction = Direction.NORTH;
+			break;
+		case EAST:
+			direction = Direction.SOUTH;
+			break;
+		case NORTHWEST:
+			direction = Direction.NORTHEAST;
+			break;
+		case NORTHEAST:
+			direction = Direction.SOUTHEAST;
+			break;
+		case SOUTHWEST:
+			direction = Direction.NORTHWEST;
+			break;
+		case SOUTHEAST:
+			direction = Direction.SOUTHWEST;
+			break;
+		default:
+			direction = null;
+		}
+	}
+	
 	public void Symbol(){
 	}
 	
