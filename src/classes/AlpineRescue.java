@@ -159,16 +159,12 @@ public class AlpineRescue extends JFrame{
 		
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			System.out.println(selectedCell.isSelected());
-			selectedCell.setSelected(false);
-			System.out.println(selectedCell.isSelected());
+			selectedCell.setSelected(false); //previous selected cell is not longer selected
 			
 			selectedCell = grid.getCellAt(arg0.getY()/12, arg0.getX()/12);
 			selectedCell.setSelected(true);
 			
 			if (selectedCell.isOccupied()) {		
-				System.out.println(selectedCell);
-				System.out.println(selectedCell.getSearchers());
 				//if there is more than on searcher in a cell, only show info for first searcher
 				selectedSearcher = selectedCell.getSearchers().get(0);
 				control.setSelectedSearcherName(selectedSearcher.getName());
