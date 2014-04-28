@@ -1,11 +1,11 @@
 package classes;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class SelectedSearcherPanel extends JPanel{
 	private JTextField selectedSearcher;
 	private TextDisplay name;

@@ -24,7 +24,7 @@ public abstract class Searcher {
 		grid.repaint();
 	}
 	
-	public Direction decodeDirection(String dir) {
+	public static Direction decodeDirection(String dir) {
 		dir = dir.toLowerCase();
 		Direction direction;
 		switch(dir) {
@@ -113,6 +113,10 @@ public abstract class Searcher {
 	
 	public void setDirection(Direction direction) {
 		this.direction = direction;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 	
 	public int getSpeed() {

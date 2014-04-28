@@ -2,7 +2,6 @@ package classes;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 	
 	
 public class GridCell{
@@ -106,9 +105,7 @@ public class GridCell{
 				CELL_WIDTH - 4, CELL_WIDTH - 4);
 		
 		if (isOccupied) {
-			g.setColor(Color.YELLOW);
-			g.fillRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
-
+			searcher.draw(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, g);
 		} else if (isSearched) {
 			g.setColor(Color.RED);
 			g.fillRect(getColumn()*CELL_WIDTH,getRow()*CELL_WIDTH,CELL_WIDTH,CELL_WIDTH);

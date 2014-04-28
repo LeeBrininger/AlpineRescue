@@ -1,7 +1,6 @@
 package classes;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,6 +149,28 @@ public class AlpineRescue extends JFrame{
 		return TIMER_DELAY;
 	}
 	
+	public Searcher getSelectedSearcher() {
+		return selectedSearcher;
+	}
+	
+	public void setSelectedCell() {
+		selectedCell.setSelected(true);
+		
+		if (selectedCell.isOccupied()) {		
+			selectedSearcher = selectedCell.getSearcher();
+			if (selectedSearcher!= null) {
+				control.setSelectedSearcherName(selectedSearcher.getName());
+				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
+				control.setSelectedSearcherLocation(selectedCell.toString());
+			}
+		} else {
+			selectedSearcher = null;
+			control.setSelectedSearcherName("(none selected)");
+			control.setSelectedSearcherSpeed("");
+			control.setSelectedSearcherLocation(selectedCell.toString());
+		}
+	}
+	
 	class TimerListener implements ActionListener {
 
 		private AlpineRescue rescue;
@@ -161,6 +182,7 @@ public class AlpineRescue extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			for (Searcher searcher : rescue.getSearchers().values()) searcher.move(grid);
+			setSelectedCell();
 			grid.repaint();
 		}
 		
@@ -174,21 +196,8 @@ public class AlpineRescue extends JFrame{
 			selectedCell.setSelected(false); //previous selected cell is not longer selected
 			
 			selectedCell = grid.getCellAt(arg0.getY()/GridCell.getCellWidth(), arg0.getX()/GridCell.getCellWidth());
-			selectedCell.setSelected(true);
 			
-			if (selectedCell.isOccupied()) {		
-				selectedSearcher = selectedCell.getSearcher();
-				if (selectedSearcher!= null) {
-					control.setSelectedSearcherName(selectedSearcher.getName());
-					control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
-					control.setSelectedSearcherLocation(selectedCell.toString());
-				}
-			} else {
-				selectedSearcher = null;
-				control.setSelectedSearcherName("(none selected)");
-				control.setSelectedSearcherSpeed("");
-				control.setSelectedSearcherLocation(selectedCell.toString());
-			}
+			setSelectedCell();
 		}
 
 		@Override
