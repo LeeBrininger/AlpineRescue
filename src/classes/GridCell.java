@@ -78,6 +78,10 @@ public class GridCell{
 		if (this.row == newCell.row && this.column == newCell.column) return true;
 		else return false;
 	}
+	
+	public ArrayList<Searcher> getSearchers() {
+		return searchers;
+	}
 
 	@Override
 	public String toString() {

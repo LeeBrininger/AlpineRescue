@@ -23,4 +23,16 @@ public class SelectedSearcher extends JPanel{
 		add(speed);
 		add(location);
 	}
+	
+	public void setName(String text) {
+		name.setText(text);
+	}
+	
+	public void setSpeed(String text) {
+		speed.setText(text);
+	}
+	
+	public void setLocation(String text) {
+		location.setText(text);
+	}
 }

@@ -31,6 +31,7 @@ public class AlpineRescue extends JFrame{
 	private Map<String, Searcher> searchers;
 	private Map<String, String> searcherMap;
 	private boolean isPaused;
+	private ControlPanel control;
 	
 	public AlpineRescue(){
 		searchers = new HashMap<String, Searcher>();
@@ -57,7 +58,7 @@ public class AlpineRescue extends JFrame{
 		setSize(new Dimension(625, 875));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ControlPanel control = new ControlPanel();
+		control = new ControlPanel();
 		add(BorderLayout.SOUTH, control);
 		add(BorderLayout.CENTER, grid);
 		grid.addMouseListener(new AlpineListener());
@@ -147,18 +148,26 @@ public class AlpineRescue extends JFrame{
 		
 	}
 	
-	public static void main(String[] args){
-		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
-		rescue.pause();
-		rescue.setVisible(true);
-	}
-	
 	//mouse listener
 	private class AlpineListener implements MouseListener {
 		
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			System.out.println(grid.getCellAt(arg0.getX()/12, arg0.getY()/12));
+			
+			
+			if (grid.getCellAt(arg0.getY()/12, arg0.getX()/12).isOccupied()) {		
+				System.out.println(grid.getCellAt(arg0.getY()/12, arg0.getX()/12));
+				System.out.println(grid.getCellAt(arg0.getY()/12, arg0.getX()/12).getSearchers());
+				//if there is more than on searcher in a cell, only show info for first searcher
+				Searcher s = grid.getCellAt(arg0.getY()/12, arg0.getX()/12).getSearchers().get(0);
+				control.setSelectedSearcherName(s.getName());
+				control.setSelectedSearcherSpeed(Integer.toString(s.getSpeed()));
+				control.setSelectedSearcherLocation(grid.getCellAt(arg0.getY()/12, arg0.getX()/12).toString());
+			} else {
+				control.setSelectedSearcherName("");
+				control.setSelectedSearcherSpeed("");
+				control.setSelectedSearcherLocation("");
+			}
 		}
 
 		@Override
@@ -186,5 +195,13 @@ public class AlpineRescue extends JFrame{
 		}
 	}
 	
+	
+	public static void main(String[] args){
+		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
+		rescue.pause();
+		rescue.setVisible(true);
+	}
+	
+
 
 }

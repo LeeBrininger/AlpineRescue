@@ -37,6 +37,18 @@ public class ControlPanel extends JPanel{
 		
 	}
 	
+	public void setSelectedSearcherName(String inputText) {
+		selected.setName(inputText);
+	}
+	
+	public void setSelectedSearcherSpeed(String inputText) {
+		selected.setSpeed(inputText);
+	}
+	
+	public void setSelectedSearcherLocation(String inputText) {
+		selected.setLocation(inputText);
+	}
+	
 	private class ButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
