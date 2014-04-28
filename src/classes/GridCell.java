@@ -10,6 +10,7 @@ public class GridCell{
 	private int column;
 	private boolean isSearched;
 	private boolean isOccupied;
+	private boolean isSelected;
 	private ArrayList<Searcher> searchers;
 	
 	public GridCell () {
@@ -39,6 +40,14 @@ public class GridCell{
 	}
 	public int getColumn(){
 		return column;
+	}
+	
+	public void setSelected(boolean selected) {
+		isSelected = selected;
+	}
+	
+	public boolean isSelected() {
+		return isSelected;
 	}
 	
 	public void setOccupied(boolean occupied) {
@@ -89,7 +98,12 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
-	
+		
+		//clear previous borders shown from being selected
+		g.setColor(Color.WHITE);
+		g.drawRect(getColumn()*12 + 1, getRow()*12 + 1, 10, 10);
+		g.drawRect(getColumn()*12 + 2, getRow()*12 + 2, 8, 8);
+		
 		if (isOccupied) {
 			for (Searcher s : searchers) {
 				s.draw(getColumn()*12, getRow()*12, 12 ,12, g);
@@ -101,9 +115,14 @@ public class GridCell{
 			g.fillRect(getColumn()*12,getRow()*12,12,12);
 		}
 		
-			g.setColor(Color.BLACK);
-			g.drawRect(getColumn()*12, getRow()*12, 12, 12);
-		
+		//draw cell boarder
+		g.setColor(Color.BLACK);
+		g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+		if (isSelected) {
+			g.setColor(Color.GREEN);
+			g.drawRect(getColumn()*12 + 1, getRow()*12 + 1, 10, 10);
+			g.drawRect(getColumn()*12 + 2, getRow()*12 + 2, 8, 8);
+		}
 		
 	}
 }
