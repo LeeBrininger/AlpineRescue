@@ -4,9 +4,14 @@ import java.util.Random;
 
 public class DogTeam extends Searcher{
 	
-	Random rand;
+	private Random rand;
+	private static final int DEFAULT_SPEED = 1;
 	
 	public DogTeam(){}
+	
+	public DogTeam(String name, String direction, int row, int column, Grid grid) {
+		super(name,direction,DEFAULT_SPEED, row, column, grid);
+	}
 	
 	public DogTeam(String name, String direction, int speed, int row, int column, Grid grid){
 		super(name,direction,speed,row,column,grid);
@@ -24,11 +29,15 @@ public class DogTeam extends Searcher{
 		else if (ordinal == -1) ordinal = getDirection().values().length-1;
 		setDirection(getDirection().values()[ordinal]);
 	}
+	
+	public static int getDefaultSpeed() {
+		return DEFAULT_SPEED;
+	}
 
 	@Override
 	public void move(Grid grid) {
 		erratic();
-		updatePosition(grid);
+		for (int i =0; i < getSpeed(); i++) updatePosition(grid);
 	}
 
 }

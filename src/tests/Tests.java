@@ -36,8 +36,8 @@ public class Tests {
 		assertEquals("HikerTeam1",rescue.getSearcher("HikerTeam1").getName());
 
 		assertEquals(new GridCell(10,10), rescue.getSearcher("DogTeam1").getCell());
-		assertEquals(new GridCell(20,49), rescue.getSearcher("HeliTeam1").getCell());
-		assertEquals(new GridCell(49,20), rescue.getSearcher("HikerTeam1").getCell());
+		assertEquals(new GridCell(49,20), rescue.getSearcher("HeliTeam1").getCell());
+		assertEquals(new GridCell(20,49), rescue.getSearcher("HikerTeam1").getCell());
 		assertEquals(Direction.NORTH, rescue.getSearcher("DogTeam1").getDirection());
 		assertEquals(Direction.SOUTH, rescue.getSearcher("HeliTeam1").getDirection());
 		assertEquals(Direction.WEST, rescue.getSearcher("HikerTeam1").getDirection());
@@ -52,26 +52,18 @@ public class Tests {
 
 	}
 
-	/*@Test
-	public void testImage() {
-		rescue = new AlpineRescue("AlpineRescuemap.jpg");
-		rescue.loadGrid();
-		rescue.printGrid();
-	}*/
-
 	@Test 
 	public void testAutoMovement() throws InterruptedException {
 		rescue.pause();
 		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
-		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 3, 49, 20);
-		rescue.addSearcher("HikerTeam1", "Hiker", "west", 2, 20, 49);
+		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 3, 20, 49);
+		rescue.addSearcher("HikerTeam1", "Hiker", "west", 2, 49,20);
 		long time = System.nanoTime();
-		while(System.nanoTime() - time < 700000000);
-		assertEquals(new GridCell(9,10), rescue.getSearcher("DogTeam1").getCell());
+		int delay = rescue.getTimerDelay();
+		while((System.nanoTime() - time) < delay*10000000);
 		assertEquals(new GridCell(23,49), rescue.getSearcher("HeliTeam1").getCell());
 		assertEquals( new GridCell(49,18), rescue.getSearcher("HikerTeam1").getCell());
-		while(System.nanoTime() - time < 1000000000);
-		assertEquals(new GridCell(8,10), rescue.getSearcher("DogTeam1").getCell());
+		while(System.nanoTime() - time < delay*15000000);
 		assertEquals(new GridCell(26,49), rescue.getSearcher("HeliTeam1").getCell());
 		assertEquals( new GridCell(49,16), rescue.getSearcher("HikerTeam1").getCell());
 	}
@@ -106,22 +98,22 @@ public class Tests {
 		rescue.getSearcher("DogTeam1").manualPositionUpdate(13, 15,grid);
 
 		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 49, 20);
-		rescue.getSearcher("HeliTeam1").manualPositionUpdate(15, 49,grid);
-		rescue.getSearcher("HeliTeam1").manualPositionUpdate(10, 49,grid);
+		rescue.getSearcher("HeliTeam1").manualPositionUpdate(49,15,grid);
+		rescue.getSearcher("HeliTeam1").manualPositionUpdate(49,10,grid);
 
 		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 20, 49);
-		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 18, grid);
-		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 16, grid);
+		rescue.getSearcher("HikerTeam1").manualPositionUpdate(18,49, grid);
+		rescue.getSearcher("HikerTeam1").manualPositionUpdate(16,49, grid);
 
 		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new GridCell(10,10)));
 		assertTrue(rescue.getSearcher("DogTeam1").getVisited().contains(new GridCell(11,12)));
 
 		
-		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(20,49)));
-		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(15,49)));
+		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(49,20)));
+		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(49,15)));
 		
-		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(49,20)));
-		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(49,18)));
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(20,49)));
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(18,49)));
 		
 		assertFalse(rescue.getSearcher("DogTeam1").getVisited().contains(new GridCell(11,11)));
 		assertFalse(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(30,49)));
@@ -130,14 +122,14 @@ public class Tests {
 	
 	@Test
 	public void testEmptyGrid() {
-		grid.loadConfig(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
+		grid.loadConfig(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), "SOUTH");
 		for (GridCell cell : grid.getCellsArray()) assertFalse(cell.isOccupied());
 	}
 	
 	@Test
 	public void testNonEmptyGridConfig() {
 		grid=new Grid();
-		grid.loadConfig(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), rescue.getDefaultSpeed(), rescue.getDefaultDirection());
+		grid.loadConfig(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), "SOUTH");
 		for (GridCell cell : grid.getCellsArray()) {
 			
 			if (cell.getRow() == 20 && cell.getColumn() ==20)

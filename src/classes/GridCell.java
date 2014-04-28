@@ -9,6 +9,7 @@ public class GridCell{
 	private int column;
 	private boolean isSearched;
 	private boolean isOccupied;
+	private static final int CELL_WIDTH = 12;
 	
 	public GridCell () {
 		isSearched = false;
@@ -72,18 +73,22 @@ public class GridCell{
 		return "(" + row + ", " + column +")";
 	}
 	
+	public static int getCellWidth() {
+		return CELL_WIDTH;
+	}
+	
 	public void draw(Graphics g) {
 	
 		if (isOccupied) {
 			g.setColor(Color.YELLOW);
-			g.fillRect(getColumn()*12, getRow()*12, 12, 12);
+			g.fillRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
 		} else if (isSearched) {
 			g.setColor(Color.RED);
-			g.fillRect(getColumn()*12,getRow()*12,12,12);
+			g.fillRect(getColumn()*CELL_WIDTH,getRow()*CELL_WIDTH,CELL_WIDTH,CELL_WIDTH);
 		}
 		
 			g.setColor(Color.BLACK);
-			g.drawRect(getColumn()*12, getRow()*12, 12, 12);
+			g.drawRect(getColumn()*CELL_WIDTH, getRow()*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
 		
 		
 	}

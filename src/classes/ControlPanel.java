@@ -1,47 +1,65 @@
 package classes;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class ControlPanel extends JPanel{
 
 	private JComboBox<String> searchers;
-	private JButton addSearcher;
-	private JButton change;
-	private SelectedSearcher selected;
+	private JButton addSearcherButton;
+	private JButton changeButton;
+	private JButton pauseButton;
+	private SelectedSearcherPanel selected;
 
-	public ControlPanel(){
+	public ControlPanel(AlpineRescue rescue){
+		setLayout(new GridLayout(2,3));
+		setPreferredSize(new Dimension(375,250));
 		searchers = new JComboBox<String>();
-		addSearcher = new JButton("Add Searcher");
-		change = new JButton("Change Attributes");
-		selected = new SelectedSearcher();
-		addSearcher.addActionListener(new ButtonListener());
-		change.addActionListener(new ButtonListener());
-		
+		addSearcherButton = new JButton("Add Searcher");
+		changeButton = new JButton("Change Attributes");
+		selected = new SelectedSearcherPanel();
+		pauseButton = new JButton("Start");
+		addSearcherButton.addActionListener(new ButtonListener(rescue));
+		changeButton.addActionListener(new ButtonListener(rescue));
+		pauseButton.addActionListener(new ButtonListener(rescue));
 		
 		searchers.addItem("Helicopter");
 		searchers.addItem("Dog Team");
 		searchers.addItem("Hikers");
 		
-		
-		add(searchers);
-		add(addSearcher);
-		add(change);
+
+		add (pauseButton);
+
+		add(new JPanel());
 		add(selected);
+		add(searchers);
+		add(addSearcherButton);
+		add(changeButton);
 		
 	}
 	
-	private class ButtonListener implements ActionListener
-	{
+	class ButtonListener implements ActionListener {
+		private AlpineRescue rescue;
+		
+		public ButtonListener(AlpineRescue rescue) {
+			this.rescue = rescue;
+		}
+		
 		public void actionPerformed(ActionEvent e)
 		{
-			System.out.println("Button pressed");
+			if (e.getSource() == pauseButton) {
+				rescue.pause();
+				if (!rescue.isPaused()) pauseButton.setText("Pause");
+				else pauseButton.setName("Text");
+			} else
+				System.out.println("Button pressed");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,7 +30,7 @@ public class Grid extends JPanel{
 		}
 	}
 	
-	public void loadConfig(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, int speed, String direction) {
+	public void loadConfig(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, String direction) {
 		try {
 			FileReader reader = new FileReader(gridFile);
 			Scanner scan = new Scanner(reader);
@@ -52,7 +53,7 @@ public class Grid extends JPanel{
 					GridCell cell = cells.get(index);
 					cells.add(cell);
 					if (searcherConfig.containsKey(s)) {
-						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, speed, cell.getRow(), cell.getColumn());
+						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, cell.getRow(), cell.getColumn());
 						numSearchers++;
 						cell.setOccupied(true);
 					}

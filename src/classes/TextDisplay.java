@@ -5,6 +5,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("serial")
 public class TextDisplay extends JPanel{
 	private JTextField text;
 	private TitledBorder border;

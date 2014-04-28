@@ -8,6 +8,7 @@ public abstract class Searcher {
 	private ArrayList<GridCell> visited;
 	private String name;
 	private GridCell cell;
+	private boolean canFlyOver = false;
 	
 	public Searcher(){}
 	
@@ -61,7 +62,7 @@ public abstract class Searcher {
 		if (row < 0 || row >= grid.getNumRows()) return false;
 		else if (column < 0 || column >= grid.getNumColumns()) return false;
 		GridCell cell = grid.getCellAt(row, column);
-		if (cell.isOccupied() || cell.isSearched()) return false;
+		if ((cell.isOccupied() || cell.isSearched()) && !canFlyOver) return false;
 		else return true;
 	}
 	
@@ -69,8 +70,8 @@ public abstract class Searcher {
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
 		int column = cell.getColumn();
-		row += direction.getVertical()*speed;
-		column += direction.getHorizontal()*speed;
+		row += direction.getVertical();
+		column += direction.getHorizontal();
 		
 		if (isValidCell(row,column,grid)) {
 			cell.setSearched();
@@ -117,6 +118,14 @@ public abstract class Searcher {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public boolean canFlyOver() {
+		return canFlyOver;
+	}
+	
+	public void setFlyOver(boolean canFlyOver) {
+		this.canFlyOver = canFlyOver;
 	}
 	
 }

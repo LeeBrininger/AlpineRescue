@@ -19,10 +19,8 @@ public class AlpineRescue extends JFrame{
 	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 1000;
 	private String mapFile = "AlpineRescuemap.jpg";
-	private final static String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
+	private static final String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
 	private static final String DEFAULT_SEARCHER_CONFIG = "searcherConfig.csv";
-	private final int DEFAULT_SPEED = 1;
-	private final String DEFAULT_DIRECTION = "SOUTH";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
@@ -36,7 +34,7 @@ public class AlpineRescue extends JFrame{
 		isPaused = true;
 		searcherMap = new HashMap<String,String>();
 		loadConfig(DEFAULT_SEARCHER_CONFIG);
-		ControlPanel control = new ControlPanel();
+		ControlPanel control = new ControlPanel(this);
 		add(control);
 	}
 	
@@ -48,15 +46,18 @@ public class AlpineRescue extends JFrame{
 		searcherMap = new HashMap<String,String>();
 		loadConfig(searcherConfig);
 		grid = new Grid();
-		grid.loadConfig(this, gridFile, mapFile, searcherMap, DEFAULT_SPEED, DEFAULT_DIRECTION);
+		grid.loadConfig(this, gridFile, mapFile, searcherMap, "North");
 		
 		//GUI initialization
-		setSize(new Dimension(625, 875));
+		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
+		int height = grid.getNumRows()*GridCell.getCellWidth() + 275;
+		setSize(new Dimension(width, height));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ControlPanel control = new ControlPanel();
-		add(BorderLayout.SOUTH, control);
+		ControlPanel control = new ControlPanel(this);
+		
 		add(BorderLayout.CENTER, grid);
+		add(BorderLayout.SOUTH, control);
 	}
 	
 	public void loadConfig(String searcherConfig) {
@@ -77,6 +78,21 @@ public class AlpineRescue extends JFrame{
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void addSearcher(String name, String type, String direction, int row, int column) {
+		int speed;
+		if(type.equals("DogTeam")){
+			speed = DogTeam.getDefaultSpeed();
+			searcher = new DogTeam(name, direction, speed, row, column, grid);
+		} else if(type.equals("Helicopter")){
+			speed = Helicopter.getDefaultSpeed();
+			searcher = new Helicopter(name, direction, speed, row, column, grid);
+		} else if(type.equals("Hiker")){
+			speed = Hiker.getDefaultSpeed();
+			searcher = new Hiker(name, direction, speed, row, column,grid);
+		}
+		searchers.put(name, searcher);
+}
 	
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 			if(type.equals("DogTeam")){
@@ -105,14 +121,6 @@ public class AlpineRescue extends JFrame{
 		return grid;
 	}
 	
-	public int getDefaultSpeed() {
-		return DEFAULT_SPEED;
-	}
-	
-	public String getDefaultDirection() {
-		return DEFAULT_DIRECTION;
-	}
-	
 	public Map<String,String> getSearcherConfig() {
 		return searcherMap;
 	}
@@ -125,6 +133,10 @@ public class AlpineRescue extends JFrame{
 	
 	public boolean isPaused() {
 		return isPaused;
+	}
+	
+	public int getTimerDelay() {
+		return TIMER_DELAY;
 	}
 	
 	class TimerListener implements ActionListener {
@@ -145,7 +157,6 @@ public class AlpineRescue extends JFrame{
 	
 	public static void main(String[] args){
 		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
-		rescue.pause();
 		rescue.setVisible(true);
 	}
 	
