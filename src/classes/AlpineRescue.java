@@ -80,6 +80,7 @@ public class AlpineRescue extends JFrame{
 
 	}
 	
+	// loads the different types of searchers from a configuration file
 	public void loadConfig(String searcherConfig) {
 		try {
 			FileReader reader = new FileReader(searcherConfig);
@@ -99,6 +100,7 @@ public class AlpineRescue extends JFrame{
 		}
 	}
 	
+	// adds a searcher to the interface (without specified speed)
 	public void addSearcher(String name, String type, String direction, int row, int column) {
 		int speed;
 		if(type.equals("DogTeam")){
@@ -112,8 +114,9 @@ public class AlpineRescue extends JFrame{
 			searcher = new Hikers(name, direction, speed, row, column,grid);
 		}
 		searchers.put(name, searcher);
-}
+	}
 	
+	// adds a seracher to the interface (with speed specified)
 	public void addSearcher(String name, String type, String direction, int speed, int row, int column) {
 			if(type.equals("DogTeam")){
 				searcher = new DogTeam(name, direction, speed, row, column, grid);
@@ -150,16 +153,19 @@ public class AlpineRescue extends JFrame{
 	    return null;
 	}
 	
+	// pauses the timer
 	public void pause() {
 		isPaused = !isPaused;
 		if (!isPaused) timer.start();
 		else timer.stop();
 	}
 	
+	// returns whether or not the timer is paused
 	public boolean isPaused() {
 		return isPaused;
 	}
 	
+	// returns the delay of the timer (time between fired events in milliseconds)
 	public int getTimerDelay() {
 		return TIMER_DELAY;
 	}
@@ -176,6 +182,7 @@ public class AlpineRescue extends JFrame{
 		return this;
 	}
 	
+	// sets the cell that has been selected via mouse click
 	public void setSelectedCell() {
 		selectedCell.setSelected(true);
 		
@@ -197,6 +204,7 @@ public class AlpineRescue extends JFrame{
 		grid.repaint();
 	}
 	
+	// listener class for the timer
 	class TimerListener implements ActionListener {
 
 		private AlpineRescue rescue;
@@ -214,6 +222,7 @@ public class AlpineRescue extends JFrame{
 		
 	}
 	
+	// listener for the JMenu
 	class MenuListener implements ActionListener {
 
 		@Override
@@ -236,7 +245,7 @@ public class AlpineRescue extends JFrame{
 
 	}
 	
-	//mouse listener
+	// Mouse Listener
 	private class AlpineListener implements MouseListener {
 		
 		@Override
