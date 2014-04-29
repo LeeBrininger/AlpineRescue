@@ -98,14 +98,15 @@ public class ControlPanel extends JPanel{
 				Searcher selectedSearcher = rescue.getSelectedSearcher();
 				String type;
 				
-				if (selectedSearcher == null) {
-					JOptionPane.showMessageDialog(rescue, "There is no searcher selected!", "ERROR", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
+				
 				
 				if (e.getSource() == addSearcherButton) {
 					type = getSelectedType();
 				} else {
+					if (selectedSearcher == null) {
+						JOptionPane.showMessageDialog(rescue, "There is no searcher selected!", "ERROR", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 					type = rescue.getSelectedSearcher().getType();
 					name.setEditable(false);
 					name.setText(selectedSearcher.getName());
