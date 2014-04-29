@@ -27,6 +27,9 @@ public class AlpineRescue extends JFrame{
 	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 1000;
 	private String mapFile = "AlpineRescuemap.jpg";
+	private static final String DEFAULT_MAP_FILE = "AlpineRescuemap.jpg"; 
+	private static final String DEFAULT_SEARCHER_CONFIG = "searcherConfig.csv";
+	private static final String DEFAULT_GRID_FILE = "occupiedgrid.csv";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
@@ -37,7 +40,15 @@ public class AlpineRescue extends JFrame{
 	private GridCell selectedCell;
 	
 	public AlpineRescue(){
-
+		/*searchers = new HashMap<String, Searcher>();
+		grid = new Grid(DEFAULT_FILE);
+		timer = new Timer(TIMER_DELAY, new TimerListener(this));
+		isPaused = true;
+		searcherMap = new HashMap<String,String>();
+		loadConfig(DEFAULT_SEARCHER_CONFIG);
+		ControlPanel control = new ControlPanel(this);
+		add(control);*/
+		this(DEFAULT_GRID_FILE, DEFAULT_SEARCHER_CONFIG, DEFAULT_MAP_FILE);
 	}
 	
 	public AlpineRescue(String gridFile, String searcherConfig, String mapFile){
