@@ -13,6 +13,7 @@ public class SelectedSearcherPanel extends JPanel{
 	private TextDisplay location;
 	private TextDisplay direction;
 
+	//panel that allows the user to change attributes of the current searchers
 	public SelectedSearcherPanel(){
 		selectedSearcher = new JTextField("Selected Searcher",20);
 		selectedSearcher.setEditable(false);

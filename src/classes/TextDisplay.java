@@ -13,6 +13,7 @@ public class TextDisplay extends JPanel{
 	private TitledBorder border;
 	String title;
 
+	//a generic bordered panel with a label and text field
 	public TextDisplay(String title){
 		this.title = title;
 		text = new JTextField("",10);

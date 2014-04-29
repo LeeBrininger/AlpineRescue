@@ -38,6 +38,7 @@ public class AlpineRescue extends JFrame{
 	private Searcher selectedSearcher; //is currently set to null if no searcher selected
 	private GridCell selectedCell;
 	
+	//default constructor that calls parameterized constructor with default options
 	public AlpineRescue(){
 		this(DEFAULT_GRID_FILE, DEFAULT_SEARCHER_CONFIG, DEFAULT_MAP_FILE);
 	}
@@ -146,6 +147,7 @@ public class AlpineRescue extends JFrame{
 		return searcherMap;
 	}
 	
+	//Template-ed function for accessing maps 
 	public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
 	    for (Entry<T, E> entry : map.entrySet()) {
 	        if (value.equals(entry.getValue())) {
