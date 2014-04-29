@@ -98,8 +98,6 @@ public class ControlPanel extends JPanel{
 				Searcher selectedSearcher = rescue.getSelectedSearcher();
 				String type;
 				
-				
-				
 				if (e.getSource() == addSearcherButton) {
 					type = getSelectedType();
 				} else {

@@ -198,6 +198,7 @@ public class AlpineRescue extends JFrame{
 			selectedCell = grid.getCellAt(arg0.getY()/GridCell.getCellWidth(), arg0.getX()/GridCell.getCellWidth());
 			
 			setSelectedCell();
+			repaint();
 		}
 
 		@Override
