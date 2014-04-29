@@ -166,12 +166,14 @@ public class AlpineRescue extends JFrame{
 				control.setSelectedSearcherName(selectedSearcher.getName());
 				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
 				control.setSelectedSearcherLocation(selectedCell.toString());
+				control.setSelectedSearcherDirection(selectedSearcher.getDirection().toString());
 			}
 		} else {
 			selectedSearcher = null;
 			control.setSelectedSearcherName("(none selected)");
 			control.setSelectedSearcherSpeed("");
 			control.setSelectedSearcherLocation(selectedCell.toString());
+			control.setSelectedSearcherDirection("");
 		}
 		grid.repaint();
 	}
