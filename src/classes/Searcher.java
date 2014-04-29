@@ -72,7 +72,7 @@ public abstract class Searcher {
 	}
 	
 	// Updates the searcher's position based on its current direction and speed
-	public void updatePosition(Grid grid) {
+	public void automaticUpdatePosition(Grid grid) {
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
 		int column = cell.getColumn();
@@ -80,12 +80,26 @@ public abstract class Searcher {
 		column += direction.getHorizontal();
 		
 		if (isValidCell(row,column,grid)) {
-			manualPositionUpdate(row,column,grid);
+			updatePosition(row,column,grid);
 		}
 	}
 	
 	// Manually updates the searcher's position to a specific cell.
 	public void manualPositionUpdate(int row, int column, Grid grid){
+		// Every cell between the previous cell and the new one is presumed to be searched.
+		if (cell.getRow() < row) 
+			for (int i = cell.getRow(); i<row; i++) grid.getCellAt(i, cell.getColumn()).setSearched();
+		else 
+			for (int i = cell.getRow(); i>row; i--) grid.getCellAt(i, cell.getColumn()).setSearched();
+		if (cell.getColumn() < column)
+			for (int i = cell.getColumn(); i < column; i++) grid.getCellAt(row, i).setSearched();
+		else
+			for (int i = cell.getColumn(); i > column; i--) grid.getCellAt(row, i).setSearched();
+		updatePosition(row,column,grid);
+	}
+	
+	// Updates the searcher's current position
+	public void updatePosition(int row, int column, Grid grid) {
 		cell.setOccupied(false);
 		cell.setSearcher(null);
 		cell.setSearched();

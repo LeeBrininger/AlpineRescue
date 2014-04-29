@@ -37,7 +37,7 @@ public class DogTeam extends Searcher{
 	@Override
 	public void move(Grid grid) {
 		erratic();
-		for (int i =0; i < getSpeed(); i++) updatePosition(grid);
+		for (int i =0; i < getSpeed(); i++) automaticUpdatePosition(grid);
 	}
 
 	@Override

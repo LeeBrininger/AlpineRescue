@@ -39,14 +39,6 @@ public class AlpineRescue extends JFrame{
 	private GridCell selectedCell;
 	
 	public AlpineRescue(){
-		/*searchers = new HashMap<String, Searcher>();
-		grid = new Grid(DEFAULT_FILE);
-		timer = new Timer(TIMER_DELAY, new TimerListener(this));
-		isPaused = true;
-		searcherMap = new HashMap<String,String>();
-		loadConfig(DEFAULT_SEARCHER_CONFIG);
-		ControlPanel control = new ControlPanel(this);
-		add(control);*/
 		this(DEFAULT_GRID_FILE, DEFAULT_SEARCHER_CONFIG, DEFAULT_MAP_FILE);
 	}
 	

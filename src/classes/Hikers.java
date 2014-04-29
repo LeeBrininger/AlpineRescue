@@ -23,7 +23,7 @@ public class Hikers extends Searcher{
 	
 	@Override
 	public void move(Grid grid) {
-		for (int i =0; i < getSpeed(); i++) updatePosition(grid);
+		for (int i =0; i < getSpeed(); i++) automaticUpdatePosition(grid);
 	}
 
 	@Override
