@@ -112,7 +112,7 @@ public class Tests {
 		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(49,20)));
 		assertTrue(rescue.getSearcher("HeliTeam1").getVisited().contains(new GridCell(49,15)));
 		
-		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(20,49)));
+		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(49,20)));
 		assertTrue(rescue.getSearcher("HikerTeam1").getVisited().contains(new GridCell(18,49)));
 		
 		assertFalse(rescue.getSearcher("DogTeam1").getVisited().contains(new GridCell(11,11)));
