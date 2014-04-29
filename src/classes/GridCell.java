@@ -9,7 +9,7 @@ public class GridCell{
 	private int column;
 	private boolean isSearched;
 	private boolean isOccupied;
-	private static final int CELL_WIDTH = 12;
+	public static final int CELL_WIDTH = 12;
 	private boolean isSelected;
 	private Searcher searcher;
 	

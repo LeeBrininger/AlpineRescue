@@ -38,6 +38,6 @@ public class loadImage{
 	}
 	
 	public static void paint(Graphics g){
-		g.drawImage(img, 0, 0, Grid.numColumns *12, Grid.numRows *12, null);
+		g.drawImage(img, 0, 0, Grid.numColumns *GridCell.CELL_WIDTH, Grid.numRows *GridCell.CELL_WIDTH, null);
 	}
 }
