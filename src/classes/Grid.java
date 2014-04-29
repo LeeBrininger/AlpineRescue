@@ -66,6 +66,9 @@ public class Grid extends JPanel{
 						numSearchers++;
 						cell.setOccupied(true);
 					}
+					else{
+						cell.setOccupied(false);
+					}
 					index++;
 				}
 				

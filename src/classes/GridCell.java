@@ -15,6 +15,7 @@ public class GridCell{
 	
 	public GridCell () {
 		isSearched = false;
+		isOccupied = false;
 	}
 	
 	public GridCell (int row, int column) {
