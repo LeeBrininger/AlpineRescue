@@ -27,7 +27,7 @@ public class loadImage{
 		}
 	}
 	
-	//draws the image behing the grid, the scaled to the size of the grid
+	//draws the image behind the grid, the scaled to the size of the grid
 	public static void paint(Graphics g){
 		g.drawImage(img, 0, 0, Grid.numColumns *GridCell.CELL_WIDTH, Grid.numRows *GridCell.CELL_WIDTH, null);
 	}
