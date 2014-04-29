@@ -153,6 +153,10 @@ public class AlpineRescue extends JFrame{
 		return selectedSearcher;
 	}
 	
+	public GridCell getSelectedCell() {
+		return selectedCell;
+	}
+	
 	public void setSelectedCell() {
 		selectedCell.setSelected(true);
 		
@@ -169,6 +173,7 @@ public class AlpineRescue extends JFrame{
 			control.setSelectedSearcherSpeed("");
 			control.setSelectedSearcherLocation(selectedCell.toString());
 		}
+		grid.repaint();
 	}
 	
 	class TimerListener implements ActionListener {

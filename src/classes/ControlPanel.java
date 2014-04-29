@@ -98,7 +98,9 @@ public class ControlPanel extends JPanel{
 				Searcher selectedSearcher = rescue.getSelectedSearcher();
 				String type;
 				
-				
+				//set the values of row and column based on what cell is selected
+				rowField.setText(Integer.toString(rescue.getSelectedCell().getRow()));
+				columnField.setText(Integer.toString(rescue.getSelectedCell().getColumn()));				
 				
 				if (e.getSource() == addSearcherButton) {
 					type = getSelectedType();
