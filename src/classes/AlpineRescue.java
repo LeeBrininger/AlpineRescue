@@ -98,8 +98,8 @@ public class AlpineRescue extends JFrame{
 			speed = Helicopter.getDefaultSpeed();
 			searcher = new Helicopter(name, direction, speed, row, column, grid);
 		} else if(type.equals("Hiker")){
-			speed = Hiker.getDefaultSpeed();
-			searcher = new Hiker(name, direction, speed, row, column,grid);
+			speed = Hikers.getDefaultSpeed();
+			searcher = new Hikers(name, direction, speed, row, column,grid);
 		}
 		searchers.put(name, searcher);
 }
@@ -110,7 +110,7 @@ public class AlpineRescue extends JFrame{
 			} else if(type.equals("Helicopter")){
 				searcher = new Helicopter(name, direction, speed, row, column, grid);
 			} else if(type.equals("Hiker")){
-				searcher = new Hiker(name, direction, speed, row, column,grid);
+				searcher = new Hikers(name, direction, speed, row, column,grid);
 			}
 			searchers.put(name, searcher);
 	}
