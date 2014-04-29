@@ -36,7 +36,8 @@ public class loadImage{
 			return new Dimension(img.getWidth(null), img.getHeight(null));
 		}
 	}
+	
 	public static void paint(Graphics g){
-		g.drawImage(img, 0, 0, null);
+		g.drawImage(img, 0, 0, Grid.numColumns *12, Grid.numRows *12, null);
 	}
 }
