@@ -62,7 +62,7 @@ public class AlpineRescue extends JFrame{
 		selectedCell = grid.getCellAt(0, 0);
 		
 		//GUI initialization
-		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
+		int width = grid.getNumColumns()*GridCell.getCellWidth() + 250;
 		int height = grid.getNumRows()*GridCell.getCellWidth() + 250;
 		setSize(new Dimension(width, height));
 		setTitle("Alpine Rescue");
