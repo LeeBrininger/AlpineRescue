@@ -6,14 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
@@ -22,8 +27,6 @@ public class AlpineRescue extends JFrame{
 	// timer delay is in MILLISECONDS
 	private final int TIMER_DELAY = 1000;
 	private String mapFile = "AlpineRescuemap.jpg";
-	private static final String DEFAULT_FILE = "AlpineRescuemap.jpg"; 
-	private static final String DEFAULT_SEARCHER_CONFIG = "searcherConfig.csv";
 	private Grid grid;
 	private Searcher searcher;
 	private Map<String, Searcher> searchers;
@@ -34,14 +37,7 @@ public class AlpineRescue extends JFrame{
 	private GridCell selectedCell;
 	
 	public AlpineRescue(){
-		searchers = new HashMap<String, Searcher>();
-		grid = new Grid();
-		timer = new Timer(TIMER_DELAY, new TimerListener(this));
-		isPaused = true;
-		searcherMap = new HashMap<String,String>();
-		loadConfig(DEFAULT_SEARCHER_CONFIG);
-		ControlPanel control = new ControlPanel(this);
-		add(control);
+		
 	}
 	
 	public AlpineRescue(String gridFile, String searcherConfig, String mapFile){
@@ -67,6 +63,20 @@ public class AlpineRescue extends JFrame{
 		setSize(new Dimension(width, height));
 		setTitle("Alpine Rescue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menu = new JMenuBar();
+		JMenu file = new JMenu("File");
+		JMenuItem saveSearch = new JMenuItem("Save Search");
+		JMenuItem loadSearch = new JMenuItem("Load Existing Search");
+		JMenuItem exit = new JMenuItem("Exit");
+		file.add(saveSearch);
+		file.add(loadSearch);
+		file.add(exit);
+		menu.add(file);
+		saveSearch.addActionListener(new MenuListener());
+		loadSearch.addActionListener(new MenuListener());
+		exit.addActionListener(new MenuListener());
+		setJMenuBar(menu);
 
 	}
 	
@@ -135,6 +145,15 @@ public class AlpineRescue extends JFrame{
 		return searcherMap;
 	}
 	
+	public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+	    for (Entry<T, E> entry : map.entrySet()) {
+	        if (value.equals(entry.getValue())) {
+	            return entry.getKey();
+	        }
+	    }
+	    return null;
+	}
+	
 	public void pause() {
 		isPaused = !isPaused;
 		if (!isPaused) timer.start();
@@ -155,6 +174,10 @@ public class AlpineRescue extends JFrame{
 	
 	public GridCell getSelectedCell() {
 		return selectedCell;
+	}
+	
+	public AlpineRescue getInstance() {
+		return this;
 	}
 	
 	public void setSelectedCell() {
@@ -193,6 +216,28 @@ public class AlpineRescue extends JFrame{
 		
 	}
 	
+	class MenuListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (((JMenuItem) arg0.getSource()).getText().equals("Exit"))
+				System.exit(0);
+			else if (((JMenuItem) arg0.getSource()).getText().equals("Save Search")) {
+				grid.saveGrid(getInstance());
+			} else {
+				JFileChooser j = new JFileChooser();
+				j.showOpenDialog(null);
+				File file = j.getSelectedFile();
+				String filename = file.getAbsolutePath();
+				AlpineRescue rescue = getInstance();
+				rescue.dispose();
+				rescue = new AlpineRescue(filename, "searcherConfig.csv", mapFile);
+				rescue.setVisible(true);
+			}
+		}
+
+	}
+	
 	//mouse listener
 	private class AlpineListener implements MouseListener {
 		
@@ -208,35 +253,29 @@ public class AlpineRescue extends JFrame{
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 	}
 	
 	
 	public static void main(String[] args){
-		AlpineRescue rescue = new AlpineRescue("occupiedgrid.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
+		AlpineRescue rescue = new AlpineRescue("defaultconfig.csv", "searcherConfig.csv", "AlpineRescuemap.jpg");
 		rescue.setVisible(true);
 	}
 	
-
-
 }
