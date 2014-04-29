@@ -20,10 +20,8 @@ public class DogTeam extends Searcher{
 		rand = new Random();
 	}
 	
-	public void Symbol(){
-		//TODO
-	}
-	
+	// Dog movement is erratic, so they have an equal chance of moving the same direction
+	// or changing direction by 45 degrees left or right.
 	public void erratic() {
 		int directionChange = rand.nextInt(3)-1;
 		int ordinal = getDirection().ordinal() + directionChange;

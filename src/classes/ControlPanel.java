@@ -34,10 +34,12 @@ public class ControlPanel extends JPanel{
 		changeButton.addActionListener(new ButtonListener(rescue));
 		pauseButton.addActionListener(new ButtonListener(rescue));
 		
+		// add items to combobox
 		searchers.addItem("Helicopter");
 		searchers.addItem("Dog Team");
 		searchers.addItem("Hikers");
 		
+		// Setup the layout of the buttons/text fields
 		gbc.gridx=0;
 		gbc.gridy=0;
 		gbc.weightx = .2;
@@ -79,6 +81,7 @@ public class ControlPanel extends JPanel{
 		return (String)searchers.getSelectedItem();
 	}
 	
+	// Button listener for the control panel
 	class ButtonListener implements ActionListener {
 		private AlpineRescue rescue;
 
@@ -118,6 +121,7 @@ public class ControlPanel extends JPanel{
 					name.setText(selectedSearcher.getName());
 				}
 
+				// array of fields for JOptionPane
 				Object[] inputs = { "Type: ", type, "Name: ", name,
 						"Direction:", direction, "Speed: ", speedField,
 						"Row: ", rowField, "Column: ", columnField };
@@ -138,6 +142,8 @@ public class ControlPanel extends JPanel{
 
 				boolean check = checkFields(name, direction, speedField,
 						rowField, columnField);
+				// if all of the fields are valid, then either add the searcher or change the selected
+				// searcher's attributes
 				if (check) {
 					int row = Integer.parseInt(rowField.getText());
 					int column = Integer.parseInt(columnField.getText());
@@ -166,6 +172,7 @@ public class ControlPanel extends JPanel{
 			}
 		}
 
+		// Checks that the fields for changing attributes and adding searchers is valid (e.g. fields can't be empty)
 		public boolean checkFields(JTextField name, JTextField direction,
 				JTextField speed, JTextField rowField, JTextField columnField) {
 			if (name.getText().equals("") || direction.getText().equals("")

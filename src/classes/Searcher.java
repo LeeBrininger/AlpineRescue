@@ -24,6 +24,7 @@ public abstract class Searcher {
 		grid.repaint();
 	}
 	
+	// Decodes the direction from a String into its proper enumerated type
 	public static Direction decodeDirection(String dir) {
 		dir = dir.toLowerCase();
 		Direction direction;
@@ -60,6 +61,7 @@ public abstract class Searcher {
 	
 	public abstract void move(Grid grid);
 	
+	// Determines whether the cell is valid to be moved to.
 	public boolean isValidCell(int row,int column, Grid grid) {
 		if (row < 0 || row >= grid.getNumRows()) return false;
 		else if (column < 0 || column >= grid.getNumColumns()) return false;
@@ -68,6 +70,7 @@ public abstract class Searcher {
 		else return true;
 	}
 	
+	// Updates the searcher's position based on its current direction and speed
 	public void updatePosition(Grid grid) {
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
@@ -80,6 +83,7 @@ public abstract class Searcher {
 		}
 	}
 	
+	// Manually updates the searcher's position to a specific cell.
 	public void manualPositionUpdate(int row, int column, Grid grid){
 		cell.setOccupied(false);
 		cell.setSearcher(null);
@@ -89,12 +93,11 @@ public abstract class Searcher {
 		cell.setOccupied(true);
 		cell.setSearcher(this);
 	}
+	
+	// Changes the searcher's direction.
 	public void changeDirection(String newDirection){
 		visited.add(new GridCell(cell));
 		direction = decodeDirection(newDirection);
-	}
-	
-	public void Symbol(){
 	}
 	
 	public abstract void draw(int rectX, int rectY, int width, int height, Graphics g);
@@ -129,10 +132,12 @@ public abstract class Searcher {
 	
 	public abstract String getType();
 	
+	// Returns whether or not the searcher can fly over occupied/searched cells.
 	public boolean canFlyOver() {
 		return canFlyOver;
 	}
 	
+	// Sets whether or not the searcher can fly over occupied/searched cells.
 	public void setFlyOver(boolean canFlyOver) {
 		this.canFlyOver = canFlyOver;
 	}
