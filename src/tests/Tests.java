@@ -30,7 +30,7 @@ public class Tests {
 	public void testSearchers() {
 		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
 		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 49, 20);
-		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 20, 49);
+		rescue.addSearcher("HikerTeam1", "Hikers", "west", 1, 20, 49);
 		assertEquals("DogTeam1",rescue.getSearcher("DogTeam1").getName());
 		assertEquals("HeliTeam1",rescue.getSearcher("HeliTeam1").getName());
 		assertEquals("HikerTeam1",rescue.getSearcher("HikerTeam1").getName());
@@ -79,7 +79,7 @@ public class Tests {
 		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 2, 20, 00);
 		rescue.getSearcher("HeliTeam1").manualPositionUpdate(15, 49,grid);
 		
-		rescue.addSearcher("HikerTeam1", "Hiker", "west", 5, 49, 20);
+		rescue.addSearcher("HikerTeam1", "Hikers", "west", 5, 49, 20);
 		rescue.getSearcher("HikerTeam1").manualPositionUpdate(49, 18,grid);
 		
 		
