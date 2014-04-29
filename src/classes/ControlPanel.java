@@ -166,6 +166,7 @@ public class ControlPanel extends JPanel{
 						selectedSearcher.setSpeed(speed);
 						selectedSearcher.setDirection(Searcher
 								.decodeDirection(direction.getText()));
+						rescue.getGrid().repaint();
 					}
 				}
 

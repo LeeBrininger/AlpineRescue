@@ -12,7 +12,7 @@ public class BadConfigFormatException extends RuntimeException {
 
 		File file = new File(fileName);
 		try {
-			// if file doesn't exist, then create it
+			// if file doesn't exist, create it
 			if (!file.exists()) {
 				file.createNewFile();
 			}
