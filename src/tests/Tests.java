@@ -61,11 +61,11 @@ public class Tests {
 		long time = System.nanoTime();
 		int delay = rescue.getTimerDelay();
 		while((System.nanoTime() - time) < delay*10000000);
-		assertEquals(new GridCell(23,49), rescue.getSearcher("HeliTeam1").getCell());
-		assertEquals( new GridCell(49,18), rescue.getSearcher("HikerTeam1").getCell());
-		while(System.nanoTime() - time < delay*15000000);
 		assertEquals(new GridCell(26,49), rescue.getSearcher("HeliTeam1").getCell());
-		assertEquals( new GridCell(49,16), rescue.getSearcher("HikerTeam1").getCell());
+		assertEquals( new GridCell(26,49), rescue.getSearcher("HikerTeam1").getCell());
+		while(System.nanoTime() - time < delay*15000000);
+		assertEquals(new GridCell(32,49), rescue.getSearcher("HeliTeam1").getCell());
+		assertEquals( new GridCell(32,49), rescue.getSearcher("HikerTeam1").getCell());
 	}
 
 	//Tests manual movement of the searchers
