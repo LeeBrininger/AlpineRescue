@@ -62,7 +62,6 @@ public class Grid extends JPanel{
 				if (splitLine.length > numColumns) throw new BadConfigFormatException();
 				for (String s : splitLine) {
 					GridCell cell = cells.get(index);
-					//cells.add(cell);
 					if (searcherConfig.containsKey(s)) {
 						rescue.addSearcher("Searcher" + numSearchers, searcherConfig.get(s), direction, cell.getRow(), cell.getColumn());
 						numSearchers++;
