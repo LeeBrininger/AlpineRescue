@@ -46,7 +46,6 @@ public class Tests {
 
 	@Test 
 	public void testGrid() {
-		Grid grid = rescue.getGrid();
 		assertEquals(grid.getCellsArray().size(), 
 				grid.getNumRows() * grid.getNumColumns());
 
@@ -57,15 +56,15 @@ public class Tests {
 		rescue.pause();
 		rescue.addSearcher("DogTeam1", "DogTeam", "north", 1, 10, 10);
 		rescue.addSearcher("HeliTeam1", "Helicopter", "south", 3, 20, 49);
-		rescue.addSearcher("HikerTeam1", "Hiker", "west", 2, 49,20);
+		rescue.addSearcher("HikerTeam1", "Hikers", "west", 2, 49,20);
 		long time = System.nanoTime();
 		int delay = rescue.getTimerDelay();
 		while((System.nanoTime() - time) < delay*10000000);
-		assertEquals(new GridCell(26,49), rescue.getSearcher("HeliTeam1").getCell());
-		assertEquals( new GridCell(26,49), rescue.getSearcher("HikerTeam1").getCell());
+		assertEquals(new GridCell(23,49), rescue.getSearcher("HeliTeam1").getCell());
+		assertEquals( new GridCell(49, 18), rescue.getSearcher("HikerTeam1").getCell());
 		while(System.nanoTime() - time < delay*15000000);
-		assertEquals(new GridCell(32,49), rescue.getSearcher("HeliTeam1").getCell());
-		assertEquals( new GridCell(32,49), rescue.getSearcher("HikerTeam1").getCell());
+		assertEquals(new GridCell(26,49), rescue.getSearcher("HeliTeam1").getCell());
+		assertEquals( new GridCell(49,16), rescue.getSearcher("HikerTeam1").getCell());
 	}
 
 	//Tests manual movement of the searchers
