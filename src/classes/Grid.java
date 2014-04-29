@@ -3,11 +3,14 @@ package classes;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class Grid extends JPanel{
@@ -87,10 +90,48 @@ public class Grid extends JPanel{
 		super.paintComponent(g);
 		loadImage.paint(g);
 		for(GridCell i : cells){
-			i.draw(g);//TODO
+			i.draw(g);
 		}
 	}
-		
+	
+	public void saveGrid(AlpineRescue rescue) {
+		JTextField filename = new JTextField();
+		Object[] inputs = { "Filename (.csv or .txt): ", filename};
+		int choice = JOptionPane.showConfirmDialog(rescue, inputs, "Save Search", JOptionPane.OK_CANCEL_OPTION);
+		if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) return;
+		else {
+			try {
+				PrintWriter writer = new PrintWriter(filename.getText());
+				writer.println(numRows + "," + numColumns);
+				int index = -1;
+				for (GridCell cell : cells) {
+					if (index == numColumns) {
+						index=0;
+						writer.println();
+					} else if (index != -1) writer.print(",");
+					else index++;
+					
+					if (cell.isOccupied()) {
+						String type = cell.getSearcher().getType().replaceAll("\\s+", "");
+						System.out.println(type);
+						if (rescue.getSearcherConfig().containsValue(type)) {
+							type = AlpineRescue.getKeyByValue(rescue.getSearcherConfig(), type);
+							writer.print(type);
+							System.out.println(type);
+						} 
+					} else {
+						writer.print("E");
+					}
+					index++;
+				}
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.getStackTrace();
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	
 	//used for testing
 	public ArrayList<GridCell> getCellsArray() {
 		return cells;
