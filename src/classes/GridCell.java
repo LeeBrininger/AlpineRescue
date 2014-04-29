@@ -96,9 +96,10 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
+		Color transparent = new Color(0,0,0, 0);
 		
 		//clear previous borders shown from being selected
-		g.setColor(Color.WHITE);
+		g.setColor(transparent);
 		g.drawRect(getColumn()*CELL_WIDTH + 1, getRow()*CELL_WIDTH + 1,
 				CELL_WIDTH - 2, CELL_WIDTH - 2);
 		g.drawRect(getColumn()*CELL_WIDTH + 2, getRow()*CELL_WIDTH + 2, 

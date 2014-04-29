@@ -20,6 +20,7 @@ public class Grid extends JPanel{
 	public static int numColumns = 50;
 	
 	public Grid() {
+		image = new loadImage("AlpineRescuemap.jpg");
 		cells = new ArrayList<GridCell>();
 		
 		for (int i = 0; i < numRows; i++) {
@@ -69,11 +70,6 @@ public class Grid extends JPanel{
 		
 	}
 	
-
-	public void printImage(){
-		image.printImage(pictureFile);
-	}
-	
 	public GridCell getCellAt(int row, int column) {
 		return cells.get(row*this.getNumColumns() + column);
 	}
@@ -88,12 +84,12 @@ public class Grid extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		loadImage.paint(g);
 		for(GridCell i : cells){
 			i.draw(g);//TODO
 		}
 	}
-	
-	
+		
 	//used for testing
 	public ArrayList<GridCell> getCellsArray() {
 		return cells;

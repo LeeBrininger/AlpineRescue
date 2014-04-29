@@ -123,10 +123,6 @@ public class AlpineRescue extends JFrame{
 		return searchers;
 	}
 	
-	public void printGrid(){
-		grid.printImage();
-	}
-	
 	public Grid getGrid() {
 		return grid;
 	}
