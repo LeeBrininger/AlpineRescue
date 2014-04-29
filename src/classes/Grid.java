@@ -19,8 +19,9 @@ public class Grid extends JPanel{
 	public static int numRows = 50;
 	public static int numColumns = 50;
 	
-	public Grid() {
-		image = new loadImage("AlpineRescuemap.jpg");
+	public Grid(String file) {
+		pictureFile = file;
+		image = new loadImage(pictureFile);
 		cells = new ArrayList<GridCell>();
 		
 		for (int i = 0; i < numRows; i++) {

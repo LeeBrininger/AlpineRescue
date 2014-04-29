@@ -35,7 +35,7 @@ public class AlpineRescue extends JFrame{
 	
 	public AlpineRescue(){
 		searchers = new HashMap<String, Searcher>();
-		grid = new Grid();
+		grid = new Grid(DEFAULT_FILE);
 		timer = new Timer(TIMER_DELAY, new TimerListener(this));
 		isPaused = true;
 		searcherMap = new HashMap<String,String>();
@@ -51,8 +51,8 @@ public class AlpineRescue extends JFrame{
 		isPaused = true;
 		searcherMap = new HashMap<String,String>();
 		loadConfig(searcherConfig);
-		grid = new Grid();
-		grid.loadConfig(this, gridFile, mapFile, searcherMap, "North");
+		grid = new Grid(mapFile);
+		grid.loadConfig(this, gridFile, mapFile, searcherMap, "South");
 
 		control = new ControlPanel(this);
 		add(BorderLayout.SOUTH, control);

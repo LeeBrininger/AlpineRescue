@@ -128,7 +128,7 @@ public class Tests {
 	
 	@Test
 	public void testNonEmptyGridConfig() {
-		grid=new Grid();
+		grid=new Grid("AlpineRescuemap.jpg");
 		grid.loadConfig(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), "SOUTH");
 		for (GridCell cell : grid.getCellsArray()) {
 			
