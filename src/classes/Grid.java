@@ -34,6 +34,7 @@ public class Grid extends JPanel{
 		}
 	}
 	
+	// Loads a board configuration from a file.
 	public void loadConfig(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, String direction) {
 		try {
 			FileReader reader = new FileReader(gridFile);
@@ -101,14 +102,25 @@ public class Grid extends JPanel{
 		}
 	} 
 	
+	// Takes the current configuration of the grid and saves it to a specified file.
 	public void saveGrid(AlpineRescue rescue) {
 		JTextField filename = new JTextField();
-		Object[] inputs = { "Filename (.csv or .txt): ", filename};
+		Object[] inputs = { "Filename (.csv): ", filename};
+		
 		int choice = JOptionPane.showConfirmDialog(rescue, inputs, "Save Search", JOptionPane.OK_CANCEL_OPTION);
+		String path = filename.getText();
 		if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) return;
+		else if (path.length()<4) {
+			JOptionPane.showMessageDialog(rescue, "File not valid.", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		else if (!path.substring(path.length()-4).equals(".csv")){
+			JOptionPane.showMessageDialog(rescue, "File wasn't a .csv!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		} 
 		else {
 			try {
-				PrintWriter writer = new PrintWriter(filename.getText());
+				PrintWriter writer = new PrintWriter(path);
 				writer.println(numRows + "," + numColumns);
 				int index = -1;
 				for (GridCell cell : cells) {
@@ -139,8 +151,7 @@ public class Grid extends JPanel{
 		}
 	}
 	
-	//used for testing
-	public ArrayList<GridCell> getCellsArray() {
+	public ArrayList<GridCell> getCells() {
 		return cells;
 	}
 }

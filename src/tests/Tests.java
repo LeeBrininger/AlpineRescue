@@ -46,7 +46,8 @@ public class Tests {
 
 	@Test 
 	public void testGrid() {
-		assertEquals(grid.getCellsArray().size(), 
+		Grid grid = rescue.getGrid();
+		assertEquals(grid.getCells().size(), 
 				grid.getNumRows() * grid.getNumColumns());
 
 	}
@@ -122,14 +123,14 @@ public class Tests {
 	@Test
 	public void testEmptyGrid() {
 		grid.loadConfig(rescue, "defaultconfig.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), "SOUTH");
-		for (GridCell cell : grid.getCellsArray()) assertFalse(cell.isOccupied());
+		for (GridCell cell : grid.getCells()) assertFalse(cell.isOccupied());
 	}
 	
 	@Test
 	public void testNonEmptyGridConfig() {
 		grid=new Grid("AlpineRescuemap.jpg");
 		grid.loadConfig(rescue, "occupiedgrid.csv", "AlpineRescuemap.jpg", rescue.getSearcherConfig(), "SOUTH");
-		for (GridCell cell : grid.getCellsArray()) {
+		for (GridCell cell : grid.getCells()) {
 			
 			if (cell.getRow() == 20 && cell.getColumn() ==20)
 				assertTrue(cell.isOccupied());

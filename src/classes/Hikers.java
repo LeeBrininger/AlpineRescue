@@ -17,10 +17,6 @@ public class Hikers extends Searcher{
 		super(name,direction,speed,row,column, grid);
 	}
 
-	public void Symbol(){
-		
-	}
-
 	public static int getDefaultSpeed() {
 		return DEFAULT_SPEED;
 	}

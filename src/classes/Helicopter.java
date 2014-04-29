@@ -11,6 +11,7 @@ public class Helicopter extends Searcher{
 	
 	public Helicopter(String name, String direction, int row, int column, Grid grid) {
 		super(name,direction,DEFAULT_SPEED,row,column,grid);
+		// Helicopters are able to fly over searched cells.
 		setFlyOver(true);
 	}
 	
@@ -19,10 +20,6 @@ public class Helicopter extends Searcher{
 		setFlyOver(true);
 	}
 	
-	public void Symbol(){
-		
-	}
-
 	public static int getDefaultSpeed() {
 		return DEFAULT_SPEED;
 	}
