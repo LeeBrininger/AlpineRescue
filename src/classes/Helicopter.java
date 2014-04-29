@@ -26,7 +26,7 @@ public class Helicopter extends Searcher{
 
 	@Override
 	public void move(Grid grid) {
-		for (int i =0; i < getSpeed(); i++) automaticUpdatePosition(grid);
+		for (int i =0; i < getSpeed(); i++) automaticPositionUpdate(grid);
 	}
 
 

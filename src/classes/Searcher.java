@@ -72,7 +72,7 @@ public abstract class Searcher {
 	}
 	
 	// Updates the searcher's position based on its current direction and speed
-	public void automaticUpdatePosition(Grid grid) {
+	public void automaticPositionUpdate(Grid grid) {
 		visited.add(new GridCell(cell));
 		int row = cell.getRow();
 		int column = cell.getColumn();
