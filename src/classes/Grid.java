@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class Grid extends JPanel{
+	@SuppressWarnings("unused")
 	private loadImage image;
 	private String pictureFile;
 	private ArrayList<GridCell> cells;
@@ -38,6 +39,7 @@ public class Grid extends JPanel{
 	public void loadConfig(AlpineRescue rescue, String gridFile, String mapFile, Map<String,String> searcherConfig, String direction) {
 		try {
 			FileReader reader = new FileReader(gridFile);
+			@SuppressWarnings("resource")
 			Scanner scan = new Scanner(reader);
 			String line;
 			String[] splitLine;

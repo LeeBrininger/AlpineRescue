@@ -25,9 +25,9 @@ public class DogTeam extends Searcher{
 	public void erratic() {
 		int directionChange = rand.nextInt(3)-1;
 		int ordinal = getDirection().ordinal() + directionChange;
-		if (ordinal == getDirection().values().length) ordinal = 0;
-		else if (ordinal == -1) ordinal = getDirection().values().length-1;
-		setDirection(getDirection().values()[ordinal]);
+		if (ordinal == Direction.values().length) ordinal = 0;
+		else if (ordinal == -1) ordinal = Direction.values().length-1;
+		setDirection(Direction.values()[ordinal]);
 	}
 	
 	public static int getDefaultSpeed() {
