@@ -22,7 +22,9 @@ public class Grid extends JPanel{
 	public static int numRows = 50;
 	public static int numColumns = 50;
 	
-	public Grid() {
+	public Grid(String file) {
+		pictureFile = file;
+		image = new loadImage(pictureFile);
 		cells = new ArrayList<GridCell>();
 		
 		for (int i = 0; i < numRows; i++) {
@@ -72,11 +74,6 @@ public class Grid extends JPanel{
 		
 	}
 	
-
-	public void printImage(){
-		image.printImage(pictureFile);
-	}
-	
 	public GridCell getCellAt(int row, int column) {
 		return cells.get(row*this.getNumColumns() + column);
 	}
@@ -91,6 +88,7 @@ public class Grid extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		loadImage.paint(g);
 		for(GridCell i : cells){
 			i.draw(g);
 		}

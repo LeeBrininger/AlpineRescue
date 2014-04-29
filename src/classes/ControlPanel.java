@@ -71,6 +71,10 @@ public class ControlPanel extends JPanel{
 		selected.setLocation(inputText);
 	}
 	
+	public void setSelectedSearcherDirection(String inputText) {
+		selected.setDirection(inputText);
+	}
+	
 	public String getSelectedType() {
 		return (String)searchers.getSelectedItem();
 	}

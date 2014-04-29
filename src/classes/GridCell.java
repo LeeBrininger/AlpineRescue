@@ -9,7 +9,7 @@ public class GridCell{
 	private int column;
 	private boolean isSearched;
 	private boolean isOccupied;
-	private static final int CELL_WIDTH = 12;
+	public static final int CELL_WIDTH = 12;
 	private boolean isSelected;
 	private Searcher searcher;
 	
@@ -95,9 +95,10 @@ public class GridCell{
 	}
 	
 	public void draw(Graphics g) {
+		Color transparent = new Color(0,0,0, 0);
 		
 		//clear previous borders shown from being selected
-		g.setColor(Color.WHITE);
+		g.setColor(transparent);
 		g.drawRect(getColumn()*CELL_WIDTH + 1, getRow()*CELL_WIDTH + 1,
 				CELL_WIDTH - 2, CELL_WIDTH - 2);
 		g.drawRect(getColumn()*CELL_WIDTH + 2, getRow()*CELL_WIDTH + 2, 

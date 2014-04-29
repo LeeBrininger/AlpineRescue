@@ -37,7 +37,7 @@ public class AlpineRescue extends JFrame{
 	private GridCell selectedCell;
 	
 	public AlpineRescue(){
-		
+
 	}
 	
 	public AlpineRescue(String gridFile, String searcherConfig, String mapFile){
@@ -47,8 +47,8 @@ public class AlpineRescue extends JFrame{
 		isPaused = true;
 		searcherMap = new HashMap<String,String>();
 		loadConfig(searcherConfig);
-		grid = new Grid();
-		grid.loadConfig(this, gridFile, mapFile, searcherMap, "North");
+		grid = new Grid(mapFile);
+		grid.loadConfig(this, gridFile, mapFile, searcherMap, "South");
 
 		control = new ControlPanel(this);
 		add(BorderLayout.SOUTH, control);
@@ -58,7 +58,7 @@ public class AlpineRescue extends JFrame{
 		selectedCell = grid.getCellAt(0, 0);
 		
 		//GUI initialization
-		int width = grid.getNumColumns()*GridCell.getCellWidth() + 20;
+		int width = grid.getNumColumns()*GridCell.getCellWidth() + 250;
 		int height = grid.getNumRows()*GridCell.getCellWidth() + 250;
 		setSize(new Dimension(width, height));
 		setTitle("Alpine Rescue");
@@ -133,10 +133,6 @@ public class AlpineRescue extends JFrame{
 		return searchers;
 	}
 	
-	public void printGrid(){
-		grid.printImage();
-	}
-	
 	public Grid getGrid() {
 		return grid;
 	}
@@ -189,12 +185,14 @@ public class AlpineRescue extends JFrame{
 				control.setSelectedSearcherName(selectedSearcher.getName());
 				control.setSelectedSearcherSpeed(Integer.toString(selectedSearcher.getSpeed()));
 				control.setSelectedSearcherLocation(selectedCell.toString());
+				control.setSelectedSearcherDirection(selectedSearcher.getDirection().toString());
 			}
 		} else {
 			selectedSearcher = null;
 			control.setSelectedSearcherName("(none selected)");
 			control.setSelectedSearcherSpeed("");
 			control.setSelectedSearcherLocation(selectedCell.toString());
+			control.setSelectedSearcherDirection("");
 		}
 		grid.repaint();
 	}

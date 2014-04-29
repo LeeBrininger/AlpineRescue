@@ -11,6 +11,7 @@ public class SelectedSearcherPanel extends JPanel{
 	private TextDisplay name;
 	private TextDisplay speed;
 	private TextDisplay location;
+	private TextDisplay direction;
 
 	public SelectedSearcherPanel(){
 		selectedSearcher = new JTextField("Selected Searcher",20);
@@ -18,11 +19,13 @@ public class SelectedSearcherPanel extends JPanel{
 		name = new TextDisplay("Name");
 		speed = new TextDisplay("Speed");
 		location = new TextDisplay("Location");
+		direction = new TextDisplay("Direction");
 		setLayout(new GridLayout(2,2));
 		add(selectedSearcher);
 		add(name);
 		add(speed);
 		add(location);
+		add(direction);
 		speed.setSize(100,20);
 	}
 	
@@ -36,5 +39,9 @@ public class SelectedSearcherPanel extends JPanel{
 	
 	public void setLocation(String text) {
 		location.setText(text);
+	}
+	
+	public void setDirection(String text){
+		direction.setText(text);
 	}
 }
