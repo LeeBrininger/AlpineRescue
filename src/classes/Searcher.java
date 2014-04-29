@@ -66,7 +66,8 @@ public abstract class Searcher {
 		if (row < 0 || row >= grid.getNumRows()) return false;
 		else if (column < 0 || column >= grid.getNumColumns()) return false;
 		GridCell cell = grid.getCellAt(row, column);
-		if ((cell.isOccupied() || cell.isSearched()) && !canFlyOver) return false;
+		if (cell.isSearched() && !canFlyOver) return false;
+		else if (cell.isOccupied()) return false;
 		else return true;
 	}
 	
@@ -132,12 +133,12 @@ public abstract class Searcher {
 	
 	public abstract String getType();
 	
-	// Returns whether or not the searcher can fly over occupied/searched cells.
+	// Returns whether or not the searcher can fly over searched cells.
 	public boolean canFlyOver() {
 		return canFlyOver;
 	}
 	
-	// Sets whether or not the searcher can fly over occupied/searched cells.
+	// Sets whether or not the searcher can fly over searched cells.
 	public void setFlyOver(boolean canFlyOver) {
 		this.canFlyOver = canFlyOver;
 	}
