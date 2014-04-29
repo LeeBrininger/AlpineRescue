@@ -43,9 +43,12 @@ public class Grid extends JPanel{
 			
 			line = scan.nextLine();
 			splitLine = line.split(",");
-			
-			numRows = Integer.parseInt(splitLine[0]);
-			numColumns = Integer.parseInt(splitLine[1]);
+			try {
+				numRows = Integer.parseInt(splitLine[0]);
+				numColumns = Integer.parseInt(splitLine[1]);
+			} catch (NumberFormatException e) {
+				throw new BadConfigFormatException();
+			}
 		
 			int index = 0;
 			int numSearchers = 1;
@@ -53,6 +56,7 @@ public class Grid extends JPanel{
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
 				splitLine = line.split(",");
+				if (splitLine.length > numColumns) throw new BadConfigFormatException();
 				for (String s : splitLine) {
 					GridCell cell = cells.get(index);
 					cells.add(cell);
@@ -95,7 +99,7 @@ public class Grid extends JPanel{
 		for(GridCell i : cells){
 			i.draw(g);
 		}
-	}
+	} 
 	
 	public void saveGrid(AlpineRescue rescue) {
 		JTextField filename = new JTextField();
